@@ -7,7 +7,7 @@ const LocationCardHome = ({ loc }) => {
   const rating = ratings(loc.rating);
   const location = loc.address.split(",");
   const newLocation = location.slice(location.length - 3, location.length - 1);
-  console.log(loc);
+  // console.log(loc);
   return (
     <div className="shop-card">
       <Link to={`/shop/${loc.placeId}`} state={{ shop: loc }}>

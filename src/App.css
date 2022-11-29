@@ -73,24 +73,61 @@ body {
 .items {
   margin-top: 30px;
   display: flex;
-  overflow-x: scroll;
+  overflow: hidden;
   position: relative;
 }
 .arrow-left {
   position: absolute;
-  top: 50%;
+  top: 25%;
   left: 15px;
-  font-size: 30px;
+  font-size: 40px;
   z-index: 2;
   filter: drop-shadow(2px 2px 3px gray);
+  color: white;
+  cursor: pointer;
+}
+.arrow-left:active {
+  transform: translateY(2px);
+  filter: drop-shadow(0 0 0);
 }
 .arrow-right {
   position: absolute;
-  top: 50%;
+  top: 25%;
   right: 15px;
-  font-size: 30px;
+  font-size: 40px;
   z-index: 2;
   filter: drop-shadow(2px 2px 3px gray);
+  color: white;
+  cursor: pointer;
+}
+.arrow-right:active {
+  transform: translateY(2px);
+  filter: drop-shadow(0 0 0);
+}
+
+/* Style de la page shop */
+.shop-container {
+  display: flex;
+  gap: 50px;
+}
+.shop-left-side {
+  flex: calc(100% / 3 * 2 - 25px);
+  border: solid 1px blue;
+}
+.shop-right-side {
+  flex: calc(100% / 3 - 25px);
+  border: solid 1px red;
+  display: flex;
+  flex-direction: column;
+}
+.nearby-container {
+  display: flex;
+}
+.shop-leaflet-mini-map {
+  height: 210px;
+  width: 342px;
+  border-radius: 10px;
+  border: 1px solid gray;
 }
 
 /* Style du composant LocationCardHome */
@@ -236,4 +273,20 @@ body {
   font-size: 16px;
   font-weight: 600;
   line-height: 24px;
+}
+
+/* Style du Footer */
+footer {
+  font-size: 14px;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+  gap: 5px;
+  color: #5c48d3;
+  margin: 100px 0 50px 0;
+}
+footer a {
+  text-decoration: none;
+  font-weight: 700;
+  color: #5c48d3;
 }

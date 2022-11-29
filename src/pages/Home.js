@@ -2,8 +2,8 @@
 import banner from "../assets/bg_home_large_monday.webp";
 import restaurants from "../restaurants.json";
 
-// Import fonctions
-import shopCarrousel from "../functions/shopCarrousel";
+// Import des composants
+import ShopCarrousel from "../components/ShopCarrousel";
 
 const Home = () => {
   // console.log(restaurants.length);
@@ -39,28 +39,19 @@ const Home = () => {
         <div className="container">
           <div className="category-container">
             <h2 className="category-title">Vegan restaurants</h2>
-            <div className="items">
-              {shopCarrousel(restaurants, 0)}
-              {/* {restaurants.map((loc) => {
-                if (loc.category === 0) {
-                  return <LocationCardHome key={loc.placeId} loc={loc} />;
-                } else {
-                  return null;
-                }
-              })} */}
-            </div>
+            <ShopCarrousel loc={restaurants} cat={0} />
           </div>
           <div className="category-container">
             <h2 className="category-title">Vegan shops</h2>
-            <div className="items">{shopCarrousel(restaurants, 2)}</div>
+            <ShopCarrousel loc={restaurants} cat={2} />
           </div>
           <div className="category-container">
             <h2 className="category-title">Les boulangeries</h2>
-            <div className="items">{shopCarrousel(restaurants, 3)}</div>
+            <ShopCarrousel loc={restaurants} cat={3} />
           </div>
           <div className="category-container">
             <h2 className="category-title">Les glaciers</h2>
-            <div className="items">{shopCarrousel(restaurants, 12)}</div>
+            <ShopCarrousel loc={restaurants} cat={12} />
           </div>
         </div>
       </div>
