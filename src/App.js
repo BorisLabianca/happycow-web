@@ -22,6 +22,7 @@ import {
   faLocationDot,
   faPhone,
   faLink,
+  faCamera,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faStar,
@@ -31,7 +32,8 @@ library.add(
   faCircleLeft,
   faLocationDot,
   faPhone,
-  faLink
+  faLink,
+  faCamera
 );
 
 function App() {

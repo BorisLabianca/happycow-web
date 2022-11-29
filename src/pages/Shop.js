@@ -14,14 +14,46 @@ const Shop = () => {
   const location = useLocation();
   const { shop } = location.state;
   const rating = ratings(shop.rating);
-  console.log(shop);
+
+  const pictureArray = [];
+  if (shop.pictures.length !== 0) {
+    for (let i = 0; i < shop.pictures.length; i++) {
+      if (pictureArray.length < 5) {
+        pictureArray.push(
+          <img
+            src={shop.pictures[i]}
+            alt={`shop photo ${i}`}
+            className="mosaic-item"
+            key={i}
+          />
+        );
+      }
+    }
+    console.log(pictureArray.length);
+  } else {
+    pictureArray.push(
+      <img src={shop.thumbnail} className="front-pic" key={shop.thumbnail} />
+    );
+  }
+
   return (
     <div className="container">
       <div className="shop-container">
         <div className="shop-left-side">
           <h2>{shop.name}</h2>
           <div>{rating}</div>
-          <div className="pic-mosaic"></div>
+          <div className="pic-management">
+            <div className="pic-mosaic">{pictureArray}</div>
+            {shop.pictures.length > 5 && (
+              <div className="more-pics">
+                <FontAwesomeIcon icon="camera" color="white" />{" "}
+                <span className="more-pics-text">
+                  All Photos ({shop.pictures.length})
+                </span>
+              </div>
+            )}
+          </div>
+
           <p className="full-desc">{shop.description}</p>
         </div>
         <div className="shop-right-side">

@@ -6,14 +6,18 @@ import ratings from "../functions/ratings";
 
 const NearbyShop = ({ placeId }) => {
   const near = restaurants.find((shop) => shop.placeId === placeId);
-  console.log(near);
+  //   console.log(near);
   const rating = ratings(near.rating);
   return (
     <div className="nearby-container">
-      <Link to={`/shop/${near.placeId}`} state={{ shop: near }}>
-        <img src={near.thumbnail} alt="Nearby shop" />
+      <Link
+        to={`/shop/${near.placeId}`}
+        state={{ shop: near }}
+        className="nearby-pic-container"
+      >
+        <img src={near.thumbnail} alt="Nearby shop" className="nearby-pic" />
       </Link>
-      <div>
+      <div className="nearby-info">
         <Link to={`/shop/${near.placeId}`} state={{ shop: near }}>
           {near.name}
         </Link>
