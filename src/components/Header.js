@@ -16,7 +16,7 @@ const Header = () => {
       </div>
       <div className="user-nav">
         <Link className="header-add-fav-btn">Add Listing</Link>
-        <Link to="/login" className="header-log-sign-btn">
+        <Link to="/user/login" className="header-log-sign-btn">
           Login / Join
         </Link>
       </div>

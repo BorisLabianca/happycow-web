@@ -49,8 +49,8 @@ function App() {
         <Route path="/alloffersmap" element={<AllOffersMap />} />
         <Route path="/shop/:id" element={<Shop />} />
         <Route path="/shop/:id/images" element={<Images />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
+        <Route path="/user/login" element={<Login />} />
+        <Route path="/user/signup" element={<Signup />} />
       </Routes>
       <Footer
         tech={"React"}
