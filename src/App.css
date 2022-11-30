@@ -160,6 +160,40 @@ body {
   height: 70px;
 }
 
+/* Style de la page alloffersmap */
+.all-offers-map {
+  height: calc(100vh - 60px);
+  display: flex;
+}
+.shops-part {
+  height: calc(100vh - 60px);
+  width: 50%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  overflow: scroll;
+}
+.map-part {
+  height: calc(100vh - 60px);
+  width: 50%;
+}
+.main-map {
+  height: 100%;
+  width: 100%;
+  z-index: 1;
+}
+
+/* Style du composant LocationCardAllOffersMap */
+.location-card-all-offers-map {
+  width: calc(100% / 3 - 30px / 3);
+  height: 240px;
+}
+.shop-card-pic-top {
+  height: 75%;
+  width: 100%;
+  object-fit: cover;
+}
+
 /* Style de la page shop */
 .shop-container {
   display: flex;
@@ -291,6 +325,19 @@ body {
 }
 .nearby-info {
   width: calc(100% / 3 * 2 - 5px);
+}
+
+/* Style de la page images */
+.store-images-thumbnail {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+}
+.vignette {
+  width: calc(100% / 4 - 45px / 4);
+  height: 170px;
+  border-radius: 10px;
+  object-fit: cover;
 }
 
 /* Style de la page singup */

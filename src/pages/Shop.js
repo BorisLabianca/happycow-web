@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
@@ -22,7 +22,7 @@ const Shop = () => {
         pictureArray.push(
           <img
             src={shop.pictures[i]}
-            alt={`shop photo ${i}`}
+            alt={`Shop ${i}`}
             className="mosaic-item"
             key={i}
           />
@@ -32,7 +32,12 @@ const Shop = () => {
     console.log(pictureArray.length);
   } else {
     pictureArray.push(
-      <img src={shop.thumbnail} className="front-pic" key={shop.thumbnail} />
+      <img
+        src={shop.thumbnail}
+        alt="Shop main"
+        className="front-pic"
+        key={shop.thumbnail}
+      />
     );
   }
 
@@ -45,12 +50,16 @@ const Shop = () => {
           <div className="pic-management">
             <div className="pic-mosaic">{pictureArray}</div>
             {shop.pictures.length > 5 && (
-              <div className="more-pics">
+              <Link
+                to={`/shop/${shop.placeId}/images`}
+                state={{ store: shop }}
+                className="more-pics"
+              >
                 <FontAwesomeIcon icon="camera" color="white" />{" "}
                 <span className="more-pics-text">
                   All Photos ({shop.pictures.length})
                 </span>
-              </div>
+              </Link>
             )}
           </div>
 

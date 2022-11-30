@@ -6,6 +6,8 @@ import Home from "./pages/Home";
 import Signup from "./pages/Signup";
 import Login from "./pages/Login";
 import Shop from "./pages/Shop";
+import Images from "./pages/Images";
+import AllOffersMap from "./pages/AllOffersMap";
 
 // Import des composants
 import Header from "./components/Header";
@@ -23,6 +25,7 @@ import {
   faPhone,
   faLink,
   faCamera,
+  faDollarSign,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faStar,
@@ -33,7 +36,8 @@ library.add(
   faLocationDot,
   faPhone,
   faLink,
-  faCamera
+  faCamera,
+  faDollarSign
 );
 
 function App() {
@@ -42,7 +46,9 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/alloffersmap" element={<AllOffersMap />} />
         <Route path="/shop/:id" element={<Shop />} />
+        <Route path="/shop/:id/images" element={<Images />} />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
       </Routes>
