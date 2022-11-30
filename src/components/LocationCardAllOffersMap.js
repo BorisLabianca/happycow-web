@@ -7,7 +7,11 @@ import priceClass from "../functions/priceClass";
 
 const LocationCardAllOffersMap = ({ restaurant }) => {
   return (
-    <Link className="location-card-all-offers-map">
+    <Link
+      to={`/shop/${restaurant.placeId}`}
+      state={{ shop: restaurant }}
+      className="location-card-all-offers-map"
+    >
       {restaurant.thumbnail !== "https://www.happycow.net/img/no-image.jpg" ? (
         <img
           src={restaurant.thumbnail}

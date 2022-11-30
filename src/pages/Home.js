@@ -1,12 +1,12 @@
+// Import des dépendances
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
 
 // Import des assets
 import banner from "../assets/bg_home_large_monday.webp";
 import restaurants from "../restaurants.json";
 
 // Import des composants
-import ShopCarrousel from "../components/ShopCarrousel";
+import CategoryHome from "../components/CategoryHome";
 
 const Home = () => {
   const [latitude, setLatitude] = useState("");
@@ -29,32 +29,34 @@ const Home = () => {
       </div>
       <div className="homepage-main">
         <div className="container">
-          <div className="category-container">
-            <h2 className="category-title">Vegan restaurants</h2>
-            <Link
-              to="/alloffersmap"
-              state={{
-                lat: latitude,
-                long: longitude,
-                restaurants: restaurants,
-              }}
-            >
-              View all
-            </Link>
-            <ShopCarrousel loc={restaurants} cat={0} />
-          </div>
-          <div className="category-container">
-            <h2 className="category-title">Vegan shops</h2>
-            <ShopCarrousel loc={restaurants} cat={2} />
-          </div>
-          <div className="category-container">
-            <h2 className="category-title">Les boulangeries</h2>
-            <ShopCarrousel loc={restaurants} cat={3} />
-          </div>
-          <div className="category-container">
-            <h2 className="category-title">Les glaciers</h2>
-            <ShopCarrousel loc={restaurants} cat={12} />
-          </div>
+          <CategoryHome
+            lat={latitude}
+            long={longitude}
+            loc={restaurants}
+            cat={0}
+            title={"Vegan restaurants"}
+          />
+          <CategoryHome
+            lat={latitude}
+            long={longitude}
+            loc={restaurants}
+            cat={2}
+            title={"Vegan shops"}
+          />
+          <CategoryHome
+            lat={latitude}
+            long={longitude}
+            loc={restaurants}
+            cat={3}
+            title={"Les boulangeries"}
+          />
+          <CategoryHome
+            lat={latitude}
+            long={longitude}
+            loc={restaurants}
+            cat={12}
+            title={"Les glaciers"}
+          />
         </div>
       </div>
     </div>
