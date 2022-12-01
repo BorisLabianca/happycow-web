@@ -232,8 +232,36 @@ body a {
   flex: calc(100% / 3 * 2 - 25px);
   border: solid 1px blue;
 }
+.shop-left-side h2 {
+  font-size: 28px;
+  color: #444444;
+  font-weight: 600;
+  line-height: 42px;
+}
+.price-and-rate {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  margin-top: 5px;
+}
+.tag-rounded-corner {
+  border-radius: 5px;
+  padding: 5px 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  color: white;
+  width: 130px;
+  margin-bottom: 30px;
+}
+.tag-icon {
+  height: 18px;
+  width: 18px;
+}
 .pic-management {
   position: relative;
+  margin-bottom: 30px;
 }
 .more-pics {
   position: absolute;
@@ -320,6 +348,12 @@ body a {
   grid-row-end: 3;
   object-fit: cover;
 }
+.full-desc {
+  font-size: 16px;
+  font-weight: 500;
+  color: #444444;
+  line-height: 24px;
+}
 .shop-right-side {
   flex: calc(100% / 3 - 25px);
   border: solid 1px red;
@@ -343,6 +377,8 @@ body a {
 }
 .individual-info {
   display: flex;
+  align-items: center;
+  line-height: 24px;
 }
 .info-icon-container {
   min-width: 35px;
@@ -351,7 +387,7 @@ body a {
   margin-right: 10px;
 }
 .shop-info-icon {
-  font-size: 22px;
+  font-size: 18px;
   color: #444444;
 }
 .nearby {

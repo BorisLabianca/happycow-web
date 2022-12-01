@@ -9,7 +9,6 @@ const LocationCardAllOffersMap = ({ restaurant }) => {
   return (
     <Link
       to={`/shop/${restaurant._id}`}
-      state={{ shop: restaurant }}
       className="location-card-all-offers-map"
     >
       {restaurant.thumbnail !== "https://www.happycow.net/img/no-image.jpg" ? (

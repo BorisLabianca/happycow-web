@@ -1,7 +1,7 @@
 import { Icon } from "leaflet";
 
 // Import des icônes
-import vegOption from "../assets/veg_options_marker.svg";
+import vegOption from "../assets/vegan_marker.svg";
 import healthStore from "../assets/health_store_marker.svg";
 import vegShop from "../assets/veg_shop_marker.svg";
 import bakery from "../assets/bakery_marker.svg";

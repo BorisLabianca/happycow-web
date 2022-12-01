@@ -1,16 +1,29 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-
-import restaurants from "../restaurants.json";
+import axios from "axios";
 
 import ratings from "../functions/ratings";
 
-const NearbyShop = ({ id, coords }) => {
-  const near = restaurants.find((shop) => shop.placeId === id);
-  // console.log(near);
-  let rating;
-  if (near) {
-    rating = ratings(near.rating);
-  }
+const NearbyShop = ({ placeId, coords }) => {
+  const [loading, setLoading] = useState(true);
+  const [shop, setShop] = useState();
+
+  // console.log(placeId);
+  useEffect(() => {
+    const fetchShop = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:4000/near?placeId=${placeId}`
+        );
+        // console.log(response.data);
+        setShop(response.data);
+        setLoading(false);
+      } catch (error) {
+        console.log(error.response);
+      }
+    };
+    fetchShop();
+  }, [placeId]);
 
   const toRadian = (degree) => {
     return (degree * Math.PI) / 180;
@@ -30,28 +43,26 @@ const NearbyShop = ({ id, coords }) => {
     const EARTH_RADIUS = 6371;
     return c * EARTH_RADIUS * 1000;
   };
-  let distance;
-  if (near) {
-    distance = Number((getDistance(coords, near.location) / 1000).toFixed(2));
-  }
+  // let distance;
+  // if (shop) {
+  //   distance = Number((getDistance(coords, shop.location) / 1000).toFixed(2));
+  // }
 
   // console.log(distance);
-  return near ? (
+  return loading ? (
+    <div>Loading...</div>
+  ) : shop ? (
     <div className="nearby-container">
-      <Link
-        to={`/shop/${near.id}`}
-        state={{ shop: near }}
-        className="nearby-pic-container"
-      >
-        <img src={near.thumbnail} alt="Nearby shop" className="nearby-pic" />
+      <Link to={`/shop/${shop._id}`} className="nearby-pic-container">
+        <img src={shop.thumbnail} alt="Nearby shop" className="nearby-pic" />
       </Link>
       <div className="nearby-info">
-        <Link to={`/shop/${near.id}`} state={{ shop: near }}>
-          {near.name}
-        </Link>
-        <div>{rating}</div>
-        <p>{near.address}</p>
-        <p>{distance} km</p>
+        <Link to={`/shop/${shop._id}`}>{shop.name}</Link>
+        <div>{ratings(shop.rating)}</div>
+        <p>{shop.address}</p>
+        <p>
+          {Number((getDistance(coords, shop.location) / 1000).toFixed(2))} km
+        </p>
       </div>
     </div>
   ) : (

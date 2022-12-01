@@ -12,6 +12,8 @@ import { FaFacebookF } from "react-icons/fa";
 // Import des fonctions
 import ratings from "../functions/ratings";
 import markerIcon from "../functions/markerIcon";
+import priceClass from "../functions/priceClass";
+import restaurantTypeTag from "../functions/restaurantTypeTag";
 
 const Shop = () => {
   const { id } = useParams();
@@ -81,7 +83,13 @@ const Shop = () => {
       <div className="shop-container">
         <div className="shop-left-side">
           <h2>{shop.name}</h2>
-          <div>{ratings(shop.rating)}</div>
+          <div className="price-and-rate">
+            <span>{ratings(shop.rating)}</span>
+            <span>{priceClass(shop.price)}</span>
+          </div>
+          <div className="shop-type">
+            <span>{restaurantTypeTag(shop.category, shop.type)}</span>
+          </div>
           <div className="pic-management">
             <div className="pic-mosaic">{mosaic(shop)}</div>
             {shop.pictures.length > 5 && (
@@ -97,14 +105,13 @@ const Shop = () => {
               </Link>
             )}
           </div>
-
           <p className="full-desc">{shop.description}</p>
         </div>
         <div className="shop-right-side">
           <div className="map">
             <MapContainer
               center={[shop.location.lat, shop.location.lng]}
-              zoom={13}
+              zoom={17}
               scrollWheelZoom={false}
               className="shop-leaflet-mini-map"
             >
@@ -171,9 +178,13 @@ const Shop = () => {
 
           <div className="nearby">
             <h3>Nearby listings</h3>
-            {shop.nearbyPlacesIds.map((placeId) => {
+            {shop.nearbyPlacesIds.map((nearbyPlaceId) => {
               return (
-                <NearbyShop key={placeId} id={placeId} coords={shop.location} />
+                <NearbyShop
+                  key={nearbyPlaceId}
+                  placeId={nearbyPlaceId}
+                  coords={shop.location}
+                />
               );
             })}
           </div>
