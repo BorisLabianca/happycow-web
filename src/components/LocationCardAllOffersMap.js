@@ -8,7 +8,7 @@ import priceClass from "../functions/priceClass";
 const LocationCardAllOffersMap = ({ restaurant }) => {
   return (
     <Link
-      to={`/shop/${restaurant.placeId}`}
+      to={`/shop/${restaurant._id}`}
       state={{ shop: restaurant }}
       className="location-card-all-offers-map"
     >
@@ -22,6 +22,7 @@ const LocationCardAllOffersMap = ({ restaurant }) => {
         <img
           src="https://res.cloudinary.com/dbe27rnpk/image/upload/v1669731791/happycow/broken_link_vyoton.png"
           alt="Filler"
+          className="shop-card-pic-top"
         />
       )}
       <p>{restaurant.name}</p>

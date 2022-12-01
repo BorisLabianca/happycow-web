@@ -2,6 +2,10 @@
 body {
   font-family: "Poppins", sans-serif;
 }
+body a {
+  text-decoration: none;
+  color: black;
+}
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -148,6 +152,9 @@ body {
 .shop-name-card {
   font-size: 18px;
   line-height: 24px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 .card-desc {
   font-size: 16px;
@@ -319,19 +326,46 @@ body {
   display: flex;
   flex-direction: column;
 }
-.nearby-container {
-  display: flex;
-  height: 80px;
-  border-radius: 5px;
-  overflow: hidden;
-  gap: 5px;
-}
 .shop-leaflet-mini-map {
   height: 210px;
   width: 100%;
   border-radius: 10px;
   border: 1px solid gray;
   z-index: 1;
+  margin-bottom: 25px;
+}
+.under-map-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-bottom: 25px;
+  border-bottom: solid 1px #444444;
+}
+.individual-info {
+  display: flex;
+}
+.info-icon-container {
+  min-width: 35px;
+  display: flex;
+  justify-content: center;
+  margin-right: 10px;
+}
+.shop-info-icon {
+  font-size: 22px;
+  color: #444444;
+}
+.nearby {
+  padding-top: 25px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.nearby-container {
+  display: flex;
+  height: 80px;
+  border-radius: 5px;
+  border: 1px solid #eeeeee;
+  overflow: hidden;
 }
 
 /* Style du composant NearbyShop */

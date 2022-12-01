@@ -10,7 +10,7 @@ const Images = () => {
       <div className="store-info">
         <h1>
           {store.pictures.length} Photos of{" "}
-          <Link to={`/shop/${store.placeId}`} state={{ shop: store }}>
+          <Link to={`/shop/${store._id}`} state={{ shop: store }}>
             {store.name}
           </Link>
         </h1>

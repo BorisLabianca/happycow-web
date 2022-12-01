@@ -10,18 +10,14 @@ const LocationCardHome = ({ loc }) => {
   // console.log(loc);
   return (
     <div className="shop-card">
-      <Link to={`/shop/${loc.placeId}`} state={{ shop: loc }}>
+      <Link to={`/shop/${loc._id}`}>
         <img src={loc.thumbnail} alt="Shop" className="shop-card-pic" />
       </Link>
       <div className="heart-container">
         <FontAwesomeIcon icon="heart" className="heart" />
       </div>
       <div className="card-info">
-        <Link
-          to={`/shop/${loc.placeId}`}
-          state={{ shop: loc }}
-          className="shop-name-card"
-        >
+        <Link to={`/shop/${loc._id}`} className="shop-name-card">
           {loc.name}
         </Link>
         <p className="location">{newLocation.toString()}</p>

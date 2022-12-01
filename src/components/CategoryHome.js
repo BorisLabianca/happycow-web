@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import ShopCarrousel from "./ShopCarrousel";
 
 const CategoryHome = ({ lat, long, loc, cat, title }) => {
+  // console.log(loc);
   return (
     <div className="category-container">
       <h2 className="category-title">{title}</h2>
@@ -13,7 +14,6 @@ const CategoryHome = ({ lat, long, loc, cat, title }) => {
         state={{
           lat: lat,
           long: long,
-          restaurants: loc,
         }}
       >
         View all

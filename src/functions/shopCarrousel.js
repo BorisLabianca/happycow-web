@@ -2,6 +2,7 @@
 import LocationCardHome from "../components/LocationCardHome";
 
 const shopCarrousel = (loc, cat) => {
+  // console.log(loc);
   const shopArray = [];
   for (let i = 0; i < loc.length; i++) {
     if (
@@ -9,7 +10,7 @@ const shopCarrousel = (loc, cat) => {
       loc[i].thumbnail !== "https://www.happycow.net/img/no-image.jpg"
     ) {
       if (loc[i].category === cat) {
-        shopArray.push(<LocationCardHome key={loc[i].placeId} loc={loc[i]} />);
+        shopArray.push(<LocationCardHome key={loc[i]._id} loc={loc[i]} />);
       }
     }
   }
