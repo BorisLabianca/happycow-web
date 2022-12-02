@@ -27,6 +27,8 @@ import {
   faCamera,
   faDollarSign,
   faClock,
+  faEye,
+  faEyeSlash,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faStar,
@@ -39,7 +41,9 @@ library.add(
   faLink,
   faCamera,
   faDollarSign,
-  faClock
+  faClock,
+  faEye,
+  faEyeSlash
 );
 
 function App() {

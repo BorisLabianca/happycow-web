@@ -431,7 +431,85 @@ body a {
   object-fit: cover;
 }
 
-/* Style de la page singup */
+/* Style de la page login */
+.login-main {
+  background-color: lightgray;
+  height: calc(100vh - 60px);
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-container {
+  background-color: white;
+  border-radius: 15px;
+  height: 546px;
+  width: 840px;
+  overflow: hidden;
+  display: flex;
+}
+.login-signup-switch-login {
+  display: flex;
+  gap: 40px;
+  margin-bottom: 80px;
+}
+.on-login {
+  padding-bottom: 10px;
+  border-bottom: 4px solid #7c4ec4;
+}
+.login-form {
+  height: 75%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+.login-form input {
+  height: 20px;
+  width: 343px;
+  padding: 12px;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+.email-div-login {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.password-div-login {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+.password-reveal-login {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  font-size: 18px;
+}
+.password-hide-login {
+  position: absolute;
+  right: 14px;
+  bottom: 15px;
+  font-size: 18px;
+}
+.login-form button {
+  border: none;
+  font-family: "Poppins";
+  height: 24px;
+  width: 369px;
+  padding: 8px 0 8px 0;
+  color: white;
+  background-color: #7c4ec4;
+  border-radius: 5px;
+  box-sizing: content-box;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 24px;
+}
+
+/* Style de la page signup */
 .signup-main {
   background-color: lightgray;
   height: calc(100vh - 60px);
@@ -480,10 +558,10 @@ body a {
   padding: 48px;
   box-sizing: border-box;
 }
-.login-signup-switch {
+.login-signup-switch-signup {
   display: flex;
   gap: 40px;
-  margin-bottom: 80px;
+  margin-bottom: 70px;
 }
 .switch-to {
   text-decoration: none;
@@ -491,12 +569,44 @@ body a {
   font-weight: 600;
   color: #444444;
 }
+.on-signup {
+  padding-bottom: 10px;
+  border-bottom: 4px solid #7c4ec4;
+}
 .signup-form {
   height: 75%;
   width: 100%;
   display: flex;
   flex-direction: column;
   gap: 30px;
+}
+.email-div-signup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.username-div-signup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.password-div-signup {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+}
+.password-reveal-signup {
+  position: absolute;
+  right: 15px;
+  bottom: 15px;
+  font-size: 18px;
+}
+.password-hide-signup {
+  position: absolute;
+  right: 14px;
+  bottom: 15px;
+  font-size: 18px;
 }
 .signup-form input {
   height: 20px;
@@ -512,7 +622,7 @@ body a {
   width: 369px;
   padding: 8px 0 8px 0;
   color: white;
-  background-color: blueviolet;
+  background-color: #7c4ec4;
   border-radius: 5px;
   box-sizing: content-box;
   font-size: 16px;
