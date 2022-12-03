@@ -1,6 +1,7 @@
 // Import des packages
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 // Import de Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,16 +9,48 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Import des assets
 import whiteLogo from "../assets/happycow_logo_white.png";
 
-const Login = () => {
+const Login = ({ handleToken, handleUser }) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const handleVisible = () => {
     setVisible(!visible);
   };
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    try {
+      event.preventDefault();
+      setErrorMessage("");
+      if (!email || !password) {
+        setErrorMessage(
+          "Veuillez renseigner votre adresse e-mail et votre mot de passe."
+        );
+        return;
+      } else {
+        const response = await axios.post("http://localhost:4000/user/login", {
+          email: email,
+          password: password,
+        });
+        console.log(response.data);
+        if (response.data.token) {
+          handleToken(response.data.token);
+          handleUser(response.data);
+          if (location.state?.previousUrl) {
+            navigate(location.state.previousUrl);
+          } else {
+            navigate("/");
+          }
+        }
+      }
+    } catch (error) {
+      console.log(error);
+      if (error.response?.data.message === "Unauthorized.") {
+        setErrorMessage("Mauvaise combinaison adresse e-mail / mot de passe.");
+      }
+    }
   };
 
   return (
@@ -81,6 +114,9 @@ const Login = () => {
               )}
             </div>
             <button type="submit">Next</button>
+            {errorMessage ? (
+              <p className="error-message">{errorMessage}</p>
+            ) : null}
           </form>
         </div>
       </div>

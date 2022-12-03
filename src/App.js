@@ -1,5 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { useState } from "react";
+import Cookies from "js-cookie";
 
 // Import des pages
 import Home from "./pages/Home";
@@ -47,16 +49,56 @@ library.add(
 );
 
 function App() {
+  const getUser = () => {
+    if (Cookies.get("user")) {
+      const user = JSON.parse(Cookies.get("user"));
+      return user;
+    }
+  };
+  const [token, setToken] = useState(Cookies.get("token") || null);
+  const [user, setUser] = useState(getUser || null);
+
+  const handleToken = (token) => {
+    if (token) {
+      setToken(token);
+      Cookies.set("token", token, { expires: 7 });
+    } else {
+      setToken(null);
+      Cookies.remove("token");
+    }
+  };
+
+  const handleUser = (user) => {
+    if (user) {
+      setUser(user);
+      Cookies.set("user", JSON.stringify(user), { expires: 7 });
+    } else {
+      setUser({});
+      Cookies.remove("user");
+    }
+  };
+
   return (
     <Router>
-      <Header />
+      <Header
+        handleToken={handleToken}
+        token={token}
+        handleUser={handleUser}
+        user={user}
+      />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/alloffersmap" element={<AllOffersMap />} />
         <Route path="/shop/:id" element={<Shop />} />
         <Route path="/shop/:id/images" element={<Images />} />
-        <Route path="/user/login" element={<Login />} />
-        <Route path="/user/signup" element={<Signup />} />
+        <Route
+          path="/user/login"
+          element={<Login handleToken={handleToken} handleUser={handleUser} />}
+        />
+        <Route
+          path="/user/signup"
+          element={<Signup handleToken={handleToken} />}
+        />
       </Routes>
       <Footer
         tech={"React"}

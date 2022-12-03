@@ -37,16 +37,41 @@ body a {
 }
 .user-nav {
   display: flex;
+  align-items: center;
   gap: 10px;
 }
 .header-add-fav-btn {
   text-decoration: none;
   color: #7c4ec4;
+  height: 45px;
+  display: flex;
+  align-items: center;
 }
 .header-log-sign-btn {
   text-decoration: none;
   color: white;
   background-color: #7c4ec4;
+  height: 45px;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+}
+.logout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.header-avatar {
+  height: 45px;
+  width: 45px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.logout-btn {
+  border: none;
+  height: 45px;
+  background-color: #7c4ec4;
+  border-radius: 5px;
 }
 
 /* Style de la page Home */

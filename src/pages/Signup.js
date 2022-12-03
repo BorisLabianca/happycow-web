@@ -1,6 +1,7 @@
 // Import des packages
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
+import axios from "axios";
 
 // Import de Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -8,11 +9,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Import des assets
 import whiteLogo from "../assets/happycow_logo_white.png";
 
-const Signup = () => {
+const Signup = (handleToken) => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [visible, setVisible] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const handleVisible = () => {
     setVisible(!visible);
   };
