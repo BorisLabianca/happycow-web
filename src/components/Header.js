@@ -1,8 +1,13 @@
 import { Link } from "react-router-dom";
+import { useState } from "react";
+
+// Import de Fontawesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import headerLogo from "../assets/happycow_logo.svg";
 
 const Header = ({ token, handleToken, user, handleUser }) => {
+  const [visible, setVisible] = useState(false);
   return (
     <header className="header">
       <div className="header-logo">
@@ -30,17 +35,39 @@ const Header = ({ token, handleToken, user, handleUser }) => {
               className="header-avatar"
             />
           )}
-
           <span className="header-username">{user.username}</span>
-          <button
-            className="logout-btn"
-            onClick={() => {
-              handleToken(null);
-              handleUser(null);
-            }}
-          >
-            Logout
-          </button>
+          <div className="dropdown">
+            <FontAwesomeIcon
+              icon="angle-down"
+              className="drop-btn"
+              onClick={() => {
+                setVisible(!visible);
+              }}
+            />
+            <FontAwesomeIcon
+              icon="sort-up"
+              className={visible ? "dropdown-content-arrow" : "hidden"}
+            />
+            <div className={visible ? "dropdown-content" : "hidden"}>
+              <Link
+                to="/user/profile"
+                onClick={() => {
+                  setVisible(false);
+                }}
+              >
+                My profile
+              </Link>
+              <span
+                onClick={() => {
+                  handleToken(null);
+                  handleUser(null);
+                  setVisible(false);
+                }}
+              >
+                Logout
+              </span>
+            </div>
+          </div>
         </div>
       ) : (
         <div className="user-nav">

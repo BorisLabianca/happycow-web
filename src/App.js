@@ -10,6 +10,7 @@ import Login from "./pages/Login";
 import Shop from "./pages/Shop";
 import Images from "./pages/Images";
 import AllOffersMap from "./pages/AllOffersMap";
+import Profile from "./pages/Profile";
 
 // Import des composants
 import Header from "./components/Header";
@@ -31,6 +32,9 @@ import {
   faClock,
   faEye,
   faEyeSlash,
+  faAngleDown,
+  faChevronDown,
+  faSortUp,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faStar,
@@ -45,7 +49,10 @@ library.add(
   faDollarSign,
   faClock,
   faEye,
-  faEyeSlash
+  faEyeSlash,
+  faAngleDown,
+  faChevronDown,
+  faSortUp
 );
 
 function App() {
@@ -93,6 +100,7 @@ function App() {
         <Route path="/alloffersmap" element={<AllOffersMap />} />
         <Route path="/shop/:id" element={<Shop />} />
         <Route path="/shop/:id/images" element={<Images />} />
+        <Route path="user/profile" element={<Profile user={user} />} />
         <Route
           path="/user/login"
           element={<Login handleToken={handleToken} handleUser={handleUser} />}
