@@ -53,6 +53,8 @@ function App() {
     if (Cookies.get("user")) {
       const user = JSON.parse(Cookies.get("user"));
       return user;
+    } else {
+      return null;
     }
   };
   const [token, setToken] = useState(Cookies.get("token") || null);
@@ -73,7 +75,7 @@ function App() {
       setUser(user);
       Cookies.set("user", JSON.stringify(user), { expires: 7 });
     } else {
-      setUser({});
+      setUser(null);
       Cookies.remove("user");
     }
   };
@@ -97,7 +99,7 @@ function App() {
         />
         <Route
           path="/user/signup"
-          element={<Signup handleToken={handleToken} />}
+          element={<Signup handleToken={handleToken} handleUser={handleUser} />}
         />
       </Routes>
       <Footer

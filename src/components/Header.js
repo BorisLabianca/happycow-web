@@ -17,8 +17,21 @@ const Header = ({ token, handleToken, user, handleUser }) => {
       {token ? (
         <div className="logout">
           <Link className="header-add-fav-btn">Add Listing</Link>
-          <img src={user.avatar} alt="User avatar" className="header-avatar" />
-          <span>{user.username}</span>
+          {!user.avatar ? (
+            <img
+              src="https://res.cloudinary.com/dbe27rnpk/image/upload/v1670078435/happycow/avatar_filler_yolhht.svg"
+              alt="User avatar"
+              className="header-avatar"
+            />
+          ) : (
+            <img
+              src={user.avatar}
+              alt="User avatar"
+              className="header-avatar"
+            />
+          )}
+
+          <span className="header-username">{user.username}</span>
           <button
             className="logout-btn"
             onClick={() => {
