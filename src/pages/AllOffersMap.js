@@ -1,18 +1,25 @@
 // Imports des dépendances
 import { useState, useEffect } from "react";
-import { useLocation, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 // Imports de Leaflet
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-// import { Icon } from "leaflet";
+
+// import de Fontawesome
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 // Import des composants
 import LocationCardAllOffersMap from "../components/LocationCardAllOffersMap";
+import FilterButton from "../components/FilterButton";
 
 // Import des fonctions
 import ratings from "../functions/ratings";
 import markerIcon from "../functions/markerIcon";
+
+// Import du JSON
+import restaurantTypes from "../restaurantTypes.json";
+
 // // Import des icônes
 // import vegOption from "../assets/veg_options_marker.svg";
 // import healthStore from "../assets/health_store_marker.svg";
@@ -28,12 +35,27 @@ import markerIcon from "../functions/markerIcon";
 // import professional from "../assets/vegan_professional_marker.svg";
 // import other from "../assets/other_marker.svg";
 
-const AllOffersMap = () => {
+const AllOffersMap = ({ latitude, longitude }) => {
   const [loading, setLoading] = useState(true);
   const [restaurants, setRestaurants] = useState([]);
-  const location = useLocation();
-  const { lat, long } = location.state;
-  const [params, setParams] = useState({ category: [12, 3] });
+  const [categoryButtons, setCategoryButtons] = useState(
+    restaurantTypes.map((type) => {
+      return false;
+    })
+  );
+  const [sortButtons, setSortButtons] = useState([false, false, false]);
+  const [params, setParams] = useState({ category: [], sort: null });
+  const handleSort = (index, sortType) => {
+    const newSortButtons = [...sortButtons];
+    if (index === 0) {
+      newSortButtons.splice(0, 3, !newSortButtons[0], false, false);
+    } else if (index === 1) {
+      newSortButtons.splice(0, 3, false, !newSortButtons[1], false);
+    } else if (index === 2) {
+      newSortButtons.splice(0, 3, false, false, !newSortButtons[2]);
+    }
+    setSortButtons(newSortButtons);
+  };
 
   useEffect(() => {
     const fetchShops = async () => {
@@ -100,18 +122,76 @@ const AllOffersMap = () => {
   ) : (
     <div className="all-offers-map">
       <div className="shops-part">
-        {restaurants.shops.map((restaurant, index) => {
-          return (
-            <LocationCardAllOffersMap
-              key={restaurant.placeId}
-              restaurant={restaurant}
-            />
-          );
-        })}
+        <div className="filter-div">
+          {restaurantTypes.map((type, index) => {
+            return (
+              <FilterButton
+                key={type.category}
+                cat={type.category}
+                type={type.type}
+                backgroundColor={type.backgroudColor}
+                icon={type.icon}
+                categoryButtons={categoryButtons}
+                setCategoryButtons={setCategoryButtons}
+                index={index}
+                params={params}
+                setParams={setParams}
+              />
+            );
+          })}
+        </div>
+        <div className="sort-div">
+          <div
+            className={
+              sortButtons[0] === true
+                ? "name-asc sort-button-checked"
+                : "name-asc sort-button-unchecked"
+            }
+            onClick={() => {
+              handleSort(0);
+            }}
+          >
+            Name <FontAwesomeIcon icon="arrow-up-a-z" className="" />
+          </div>
+          <div
+            className={
+              sortButtons[1] === true
+                ? "name-desc sort-button-checked"
+                : "name-desc sort-button-unchecked"
+            }
+            onClick={() => {
+              handleSort(1);
+            }}
+          >
+            Name <FontAwesomeIcon icon="arrow-down-z-a" className="" />
+          </div>
+          <div
+            className={
+              sortButtons[2] === true
+                ? "rating-desc sort-button-checked"
+                : "rating-desc sort-button-unchecked"
+            }
+            onClick={() => {
+              handleSort(2);
+            }}
+          >
+            Rating <FontAwesomeIcon icon="arrow-down-long" className="" />
+          </div>
+        </div>
+        <div className="shop-cards-div">
+          {restaurants.shops.map((restaurant) => {
+            return (
+              <LocationCardAllOffersMap
+                key={restaurant.placeId}
+                restaurant={restaurant}
+              />
+            );
+          })}
+        </div>
       </div>
       <div className="map-part">
         <MapContainer
-          center={[lat, long]}
+          center={[latitude, longitude]}
           zoom={13}
           scrollWheelZoom={false}
           className="main-map"
@@ -120,7 +200,7 @@ const AllOffersMap = () => {
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
-          <Marker position={[lat, long]}>
+          <Marker position={[latitude, longitude]}>
             <Popup>
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>

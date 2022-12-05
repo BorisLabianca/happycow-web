@@ -1,0 +1,86 @@
+[
+  {
+    "category": 0,
+    "type": "Vegan",
+    "backgroudColor": "#22820E",
+    "icon": "https://res.cloudinary.com/dbe27rnpk/image/upload/v1670251425/happycow/icons/category_vegan_lwlwmr.svg"
+  },
+  {
+    "category": 1,
+    "type": "Health Store",
+    "backgroudColor": "#B49903",
+    "icon": "https://res.cloudinary.com/dbe27rnpk/image/upload/v1670251423/happycow/icons/category_health-store_xisyzb.svg"
+  },
+  {
+    "category": 2,
+    "type": "Veg-shop",
+    "backgroudColor": "#22820E",
+    "icon": "https://res.cloudinary.com/dbe27rnpk/image/upload/v1670251425/happycow/icons/category_veg-shop_nqyvyb.svg"
+  },
+  {
+    "category": 3,
+    "type": "Bakery",
+    "backgroudColor": "#9C722A",
+    "icon": "https://res.cloudinary.com/dbe27rnpk/image/upload/v1670251423/happycow/icons/category_bakery_gkw11o.svg"
+  },
+  {
+    "category": 4,
+    "type": "Hotel / B&B",
+    "backgroudColor": "#1F85A2",
+    "icon": "https://res.cloudinary.com/dbe27rnpk/image/upload/v1670251423/happycow/icons/category_b-b_u1q1mv.svg"
+  },
+  {
+    "category": 5,
+    "type": "Delivery ",
+    "backgroudColor": "#78AA06",
+    "icon": "https://res.cloudinary.com/dbe27rnpk/image/upload/v1670251422/happycow/icons/category_delivery_kodnmo.svg"
+  },
+  {
+    "category": 6,
+    "type": "Catering",
+    "backgroudColor": "#24AEA0",
+    "icon": "https://res.cloudinary.com/dbe27rnpk/image/upload/v1670251423/happycow/icons/category_catering_f37xdd.svg"
+  },
+  {
+    "category": 7,
+    "type": "Organization",
+    "backgroudColor": "#8E3388",
+    "icon": "https://res.cloudinary.com/dbe27rnpk/image/upload/v1670251424/happycow/icons/category_organization_e4qcu4.svg"
+  },
+  {
+    "category": 10,
+    "type": "Food Truck",
+    "backgroudColor": "#B569F6",
+    "icon": "https://res.cloudinary.com/dbe27rnpk/image/upload/v1670251423/happycow/icons/category_food-truck_txlcjs.svg"
+  },
+  {
+    "category": 11,
+    "type": "Veg Option",
+    "backgroudColor": "#22820E",
+    "icon": "https://res.cloudinary.com/dbe27rnpk/image/upload/v1670251425/happycow/icons/category_vegan_lwlwmr.svg"
+  },
+  {
+    "category": 12,
+    "type": "Ice Cream",
+    "backgroudColor": "#EF447F",
+    "icon": "https://res.cloudinary.com/dbe27rnpk/image/upload/v1670251424/happycow/icons/category_ice-cream_psr1jk.svg"
+  },
+  {
+    "category": 13,
+    "type": "Juice Bar",
+    "backgroudColor": "#FBB040",
+    "icon": "https://res.cloudinary.com/dbe27rnpk/image/upload/v1670251424/happycow/icons/category_juice-bar_dr4uuj.svg"
+  },
+  {
+    "category": 14,
+    "type": "Professional",
+    "backgroudColor": "#016639",
+    "icon": "https://res.cloudinary.com/dbe27rnpk/image/upload/v1670251424/happycow/icons/category_vegan-professional_pimhg1.svg"
+  },
+  {
+    "category": 99,
+    "type": "Other",
+    "backgroudColor": "#3775C5",
+    "icon": "https://res.cloudinary.com/dbe27rnpk/image/upload/v1670251424/happycow/icons/category_other_yzxxqz.svg"
+  }
+]

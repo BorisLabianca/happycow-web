@@ -1,5 +1,4 @@
 // Import des icônes
-
 import vegOption from "../assets/category_vegan.svg";
 import healthStore from "../assets/category_health-store.svg";
 import vegShop from "../assets/category_veg-shop.svg";
@@ -52,7 +51,6 @@ const restaurantTypeTag = (cat, type) => {
         className="tag-rounded-corner"
         style={{ backgroundColor: "#9C722A" }}
       >
-        {" "}
         <img src={bakery} alt="Shop type" className="tag-icon" />
         <span>{typeName}</span>
       </div>
