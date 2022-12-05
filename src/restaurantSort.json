@@ -1,0 +1,17 @@
+[
+  {
+    "sortType": "NameABC",
+    "title": "Name",
+    "iconName": "arrow-up-a-z"
+  },
+  {
+    "sortType": "NameCBA",
+    "title": "Name",
+    "iconName": "arrow-down-z-a"
+  },
+  {
+    "sortType": "RatingCBA",
+    "title": "Rating",
+    "iconName": "arrow-down-long"
+  }
+]

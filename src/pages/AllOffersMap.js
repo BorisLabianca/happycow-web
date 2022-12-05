@@ -17,8 +17,9 @@ import FilterButton from "../components/FilterButton";
 import ratings from "../functions/ratings";
 import markerIcon from "../functions/markerIcon";
 
-// Import du JSON
+// Import des JSON
 import restaurantTypes from "../restaurantTypes.json";
+import restaurantSort from "../restaurantSort.json";
 
 // // Import des icônes
 // import vegOption from "../assets/veg_options_marker.svg";
@@ -55,6 +56,18 @@ const AllOffersMap = ({ latitude, longitude }) => {
       newSortButtons.splice(0, 3, false, false, !newSortButtons[2]);
     }
     setSortButtons(newSortButtons);
+    const newParams = { ...params };
+    if (
+      (index === 0 && newParams.sort === sortType) ||
+      (index === 1 && newParams.sort === sortType) ||
+      (index === 2 && newParams.sort === sortType)
+    ) {
+      newParams.sort = null;
+      setParams(newParams);
+    } else if (newParams.sort !== sortType) {
+      newParams.sort = sortType;
+      setParams(newParams);
+    }
   };
 
   useEffect(() => {
@@ -144,11 +157,11 @@ const AllOffersMap = ({ latitude, longitude }) => {
           <div
             className={
               sortButtons[0] === true
-                ? "name-asc sort-button-checked"
-                : "name-asc sort-button-unchecked"
+                ? "sort-button-checked"
+                : "sort-button-unchecked"
             }
             onClick={() => {
-              handleSort(0);
+              handleSort(0, "NameABC");
             }}
           >
             Name <FontAwesomeIcon icon="arrow-up-a-z" className="" />
@@ -160,7 +173,7 @@ const AllOffersMap = ({ latitude, longitude }) => {
                 : "name-desc sort-button-unchecked"
             }
             onClick={() => {
-              handleSort(1);
+              handleSort(1, "NameCBA");
             }}
           >
             Name <FontAwesomeIcon icon="arrow-down-z-a" className="" />
@@ -172,7 +185,7 @@ const AllOffersMap = ({ latitude, longitude }) => {
                 : "rating-desc sort-button-unchecked"
             }
             onClick={() => {
-              handleSort(2);
+              handleSort(2, "RatingCBA");
             }}
           >
             Rating <FontAwesomeIcon icon="arrow-down-long" className="" />
