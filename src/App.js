@@ -35,6 +35,7 @@ import {
   faAngleDown,
   faChevronDown,
   faSortUp,
+  faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faStar,
@@ -52,7 +53,8 @@ library.add(
   faEyeSlash,
   faAngleDown,
   faChevronDown,
-  faSortUp
+  faSortUp,
+  faChevronRight
 );
 
 function App() {

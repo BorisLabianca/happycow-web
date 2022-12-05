@@ -33,11 +33,14 @@ const AllOffersMap = () => {
   const [restaurants, setRestaurants] = useState([]);
   const location = useLocation();
   const { lat, long } = location.state;
+  const [params, setParams] = useState({ category: [12, 3] });
 
   useEffect(() => {
     const fetchShops = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/allshops");
+        const response = await axios.get("http://localhost:4000/allshops", {
+          params,
+        });
         // console.log(response.data.shops);
         setRestaurants(response.data);
         setLoading(false);
@@ -46,7 +49,7 @@ const AllOffersMap = () => {
       }
     };
     fetchShops();
-  }, []);
+  }, [params]);
 
   // const markerIcon = (cat) => {
   //   if (cat === 0 || cat === 11) {

@@ -13,9 +13,9 @@ const LocationCardHome = ({ loc }) => {
       <Link to={`/shop/${loc._id}`}>
         <img src={loc.thumbnail} alt="Shop" className="shop-card-pic" />
       </Link>
-      <div className="heart-container">
+      {/* <div className="heart-container">
         <FontAwesomeIcon icon="heart" className="heart" />
-      </div>
+      </div> */}
       <div className="card-info">
         <Link to={`/shop/${loc._id}`} className="shop-name-card">
           {loc.name}

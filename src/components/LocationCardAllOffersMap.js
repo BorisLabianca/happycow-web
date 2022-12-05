@@ -1,5 +1,6 @@
 // Import des dépendances
 import { Link } from "react-router-dom";
+import { useState } from "react";
 
 // Import des fonctions
 import ratings from "../functions/ratings";

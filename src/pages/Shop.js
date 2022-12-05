@@ -39,16 +39,27 @@ const Shop = () => {
   const mosaic = (shop) => {
     const pictureArray = [];
     if (shop.pictures.length !== 0) {
-      for (let i = 0; i < shop.pictures.length; i++) {
-        if (pictureArray.length < 5) {
-          pictureArray.push(
-            <img
-              src={shop.pictures[i]}
-              alt={`Shop ${i}`}
-              className="mosaic-item"
-              key={i}
-            />
-          );
+      if (shop.pictures.length === 1) {
+        pictureArray.push(
+          <img
+            src={shop.pictures[0]}
+            alt="Shop main"
+            className="front-pic"
+            key={shop.pictures[0]}
+          />
+        );
+      } else {
+        for (let i = 0; i < shop.pictures.length; i++) {
+          if (pictureArray.length < 5) {
+            pictureArray.push(
+              <img
+                src={shop.pictures[i]}
+                alt={`Shop ${i}`}
+                className="mosaic-item"
+                key={i}
+              />
+            );
+          }
         }
       }
     } else {
