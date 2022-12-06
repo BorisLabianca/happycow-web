@@ -38,7 +38,7 @@ body a {
 .user-nav {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
 .header-add-fav-btn {
   text-decoration: none;
@@ -71,12 +71,12 @@ body a {
 .logout {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
 .dropdown-access {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 15px;
   cursor: pointer;
 }
 .header-avatar {
@@ -349,6 +349,7 @@ body a {
   gap: 5px;
   color: white;
   width: fit-content;
+  cursor: pointer;
 }
 .filter-button-unchecked {
   border-radius: 5px;
@@ -361,8 +362,9 @@ body a {
   color: #444444;
   box-sizing: border-box;
   width: fit-content;
+  cursor: pointer;
 }
-.filter-button-checked {
+/* .filter-button-checked {
   border-radius: 5px;
   border: 1px solid #444444;
   padding: 5px;
@@ -373,7 +375,8 @@ body a {
   color: white;
   box-sizing: border-box;
   width: fit-content;
-}
+  cursor: pointer;
+} */
 .sort-div {
   display: flex;
   gap: 10px;
@@ -383,6 +386,7 @@ body a {
   border: 1px solid #444444;
   border-radius: 5px;
   padding: 5px;
+  cursor: pointer;
 }
 .sort-button-checked {
   width: fit-content;
@@ -391,6 +395,7 @@ body a {
   color: white;
   border-radius: 5px;
   padding: 5px;
+  cursor: pointer;
 }
 .reset-button {
   width: fit-content;
@@ -399,6 +404,7 @@ body a {
   border-radius: 5px;
   padding: 5px;
   color: white;
+  cursor: pointer;
 }
 .shop-cards-div {
   display: flex;
@@ -733,6 +739,11 @@ body a {
   color: #5c48d3;
   font-size: 40px;
   cursor: pointer;
+}
+
+/* Style de la page Add-listing */
+.add-listing-main {
+  padding: 30px 0;
 }
 
 /* Style de la page login */

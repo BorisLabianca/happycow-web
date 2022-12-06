@@ -21,7 +21,9 @@ const Header = ({ token, handleToken, user, handleUser }) => {
       </div>
       {token ? (
         <div className="logout">
-          <Link className="header-add-fav-btn">Add Listing</Link>
+          <Link to="/add-listing" className="header-add-fav-btn">
+            Add Listing
+          </Link>
           <div
             className="dropdown-access"
             onClick={() => {
