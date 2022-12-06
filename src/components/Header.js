@@ -22,50 +22,51 @@ const Header = ({ token, handleToken, user, handleUser }) => {
       {token ? (
         <div className="logout">
           <Link className="header-add-fav-btn">Add Listing</Link>
-          {!user.avatar ? (
-            <img
-              src="https://res.cloudinary.com/dbe27rnpk/image/upload/v1670078435/happycow/avatar_filler_yolhht.svg"
-              alt="User avatar"
-              className="header-avatar"
-            />
-          ) : (
-            <img
-              src={user.avatar}
-              alt="User avatar"
-              className="header-avatar"
-            />
-          )}
-          <span className="header-username">{user.username}</span>
-          <div className="dropdown">
-            <FontAwesomeIcon
-              icon="angle-down"
-              className="drop-btn"
-              onClick={() => {
-                setVisible(!visible);
-              }}
-            />
-            <FontAwesomeIcon
-              icon="sort-up"
-              className={visible ? "dropdown-content-arrow" : "hidden"}
-            />
-            <div className={visible ? "dropdown-content" : "hidden"}>
-              <Link
-                to="/user/profile"
-                onClick={() => {
-                  setVisible(false);
-                }}
-              >
-                My profile
-              </Link>
-              <span
-                onClick={() => {
-                  handleToken(null);
-                  handleUser(null);
-                  setVisible(false);
-                }}
-              >
-                Logout
-              </span>
+          <div
+            className="dropdown-access"
+            onClick={() => {
+              setVisible(!visible);
+            }}
+          >
+            {!user.avatar ? (
+              <img
+                src="https://res.cloudinary.com/dbe27rnpk/image/upload/v1670078435/happycow/avatar_filler_yolhht.svg"
+                alt="User avatar"
+                className="header-avatar"
+              />
+            ) : (
+              <img
+                src={user.avatar}
+                alt="User avatar"
+                className="header-avatar"
+              />
+            )}
+            <span className="header-username">{user.username}</span>
+            <div className="dropdown">
+              <FontAwesomeIcon icon="angle-down" className="drop-btn" />
+              <FontAwesomeIcon
+                icon="sort-up"
+                className={visible ? "dropdown-content-arrow" : "hidden"}
+              />
+              <div className={visible ? "dropdown-content" : "hidden"}>
+                <Link
+                  to="/user/profile"
+                  onClick={() => {
+                    setVisible(false);
+                  }}
+                >
+                  My profile
+                </Link>
+                <span
+                  onClick={() => {
+                    handleToken(null);
+                    handleUser(null);
+                    setVisible(false);
+                  }}
+                >
+                  Logout
+                </span>
+              </div>
             </div>
           </div>
         </div>

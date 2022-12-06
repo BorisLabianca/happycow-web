@@ -16,6 +16,7 @@ import Profile from "./pages/Profile";
 // Import des composants
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import UserUpdateModal from "./modals/UserUpdateModal";
 
 // Import de Fontawesome
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -99,6 +100,7 @@ function App() {
   const [latitude, setLatitude] = useState("");
   const [longitude, setLongitude] = useState("");
   const [restaurants, setRestaurants] = useState([]);
+  const [profileModalVisible, setProfileModalVisible] = useState(false);
 
   useEffect(() => {
     const fetchLocation = async () => {
@@ -124,50 +126,72 @@ function App() {
   }, []);
 
   return (
-    <Router>
-      <Header
-        handleToken={handleToken}
-        token={token}
-        handleUser={handleUser}
-        user={user}
-      />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Home
-              loading={loading}
-              latitude={latitude}
-              longitude={longitude}
-              restaurants={restaurants}
-            />
-          }
+    <div className="app">
+      <Router>
+        <Header
+          handleToken={handleToken}
+          token={token}
+          handleUser={handleUser}
+          user={user}
         />
-        <Route
-          path="/alloffersmap"
-          element={<AllOffersMap latitude={latitude} longitude={longitude} />}
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Home
+                loading={loading}
+                latitude={latitude}
+                longitude={longitude}
+                restaurants={restaurants}
+              />
+            }
+          />
+          <Route
+            path="/alloffersmap"
+            element={<AllOffersMap latitude={latitude} longitude={longitude} />}
+          />
+          <Route path="/shop/:id" element={<Shop />} />
+          <Route path="/shop/:id/images" element={<Images />} />
+          <Route
+            path="user/profile"
+            element={
+              <Profile
+                user={user}
+                profileModalVisible={profileModalVisible}
+                setProfileModalVisible={setProfileModalVisible}
+              />
+            }
+          />
+          <Route
+            path="/user/login"
+            element={
+              <Login handleToken={handleToken} handleUser={handleUser} />
+            }
+          />
+          <Route
+            path="/user/signup"
+            element={
+              <Signup handleToken={handleToken} handleUser={handleUser} />
+            }
+          />
+        </Routes>
+        <Footer
+          tech={"React"}
+          techSite={"https://reactjs.org/"}
+          place={"Le Reacteur"}
+          placeSite={"https://www.lereacteur.io/"}
+          author={"Boris"}
+          linkedin={"https://www.linkedin.com/in/boris-labianca-01a52871/"}
         />
-        <Route path="/shop/:id" element={<Shop />} />
-        <Route path="/shop/:id/images" element={<Images />} />
-        <Route path="user/profile" element={<Profile user={user} />} />
-        <Route
-          path="/user/login"
-          element={<Login handleToken={handleToken} handleUser={handleUser} />}
-        />
-        <Route
-          path="/user/signup"
-          element={<Signup handleToken={handleToken} handleUser={handleUser} />}
-        />
-      </Routes>
-      <Footer
-        tech={"React"}
-        techSite={"https://reactjs.org/"}
-        place={"Le Reacteur"}
-        placeSite={"https://www.lereacteur.io/"}
-        author={"Boris"}
-        linkedin={"https://www.linkedin.com/in/boris-labianca-01a52871/"}
-      />
-    </Router>
+
+        {profileModalVisible && (
+          <UserUpdateModal
+            setProfileModalVisible={setProfileModalVisible}
+            token={token}
+          />
+        )}
+      </Router>
+    </div>
   );
 }
 
