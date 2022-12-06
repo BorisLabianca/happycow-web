@@ -659,6 +659,9 @@ body a {
 /* Style de la page profile */
 .profile-main {
   padding: 30px 0px;
+  display: flex;
+  justify-content: center;
+  gap: 35px;
 }
 .avatar-div {
   position: relative;
@@ -692,20 +695,44 @@ body a {
   color: transparent;
   cursor: pointer;
 }
-.avatar-input[type="file"]::file-selector-button {
-  height: 100%;
-  width: 100%;
-  border: none;
-  background-color: transparent;
-  position: absolute;
-  z-index: 10;
-  color: transparent;
-  cursor: pointer;
-}
 .avatar-upload-icon {
   color: #7c4ec4;
   font-size: 40px;
   position: absolute;
+}
+.info-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
+  padding: 25px;
+  border-radius: 5px;
+  border: 1px solid lightgray;
+  width: fit-content;
+  height: 50%;
+}
+.only-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+}
+.profile-page-username {
+  font-size: 26px;
+  line-height: 28px;
+  font-weight: 600;
+  color: #444444;
+}
+.profile-page-email {
+  font-size: 22px;
+}
+.profile-page-location {
+  font-size: 22px;
+}
+.info-edit-button {
+  color: #5c48d3;
+  font-size: 40px;
+  cursor: pointer;
 }
 
 /* Style de la page login */

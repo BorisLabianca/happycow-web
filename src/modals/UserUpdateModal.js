@@ -36,16 +36,18 @@ const UserUpdateModal = ({ token, setProfileModalVisible, handleUser }) => {
       if (response.data) {
         handleUser(response.data);
       }
+      setLoading(false);
+      setProfileModalVisible(false);
     } catch (error) {
-      console.log(error.response.data.message);
-      if (error.response.data.message === "Missing informations.") {
+      console.log(error);
+      if (error.response?.data.message === "Missing informations.") {
         setErrorMessage("Please change at least one piece of information.");
       }
-      if (error.response.data.message === "This username is already used.") {
+      if (error.response?.data.message === "This username is already used.") {
         setErrorMessage("This username is already used.");
       }
       if (
-        error.response.data.message === "This email address is already used."
+        error.response?.data.message === "This email address is already used."
       ) {
         setErrorMessage("This email address is already used.");
       }
@@ -125,7 +127,7 @@ const UserUpdateModal = ({ token, setProfileModalVisible, handleUser }) => {
           <button
             type="button"
             className={loading ? "submit-button-disabled" : "submit-button"}
-            disabled={loading && true}
+            disabled={loading ? true : false}
             onClick={handleSubmit}
           >
             Update profile

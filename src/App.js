@@ -12,6 +12,7 @@ import Shop from "./pages/Shop";
 import Images from "./pages/Images";
 import AllOffersMap from "./pages/AllOffersMap";
 import Profile from "./pages/Profile";
+import AddListing from "./pages/AddListing";
 
 // Import des composants
 import Header from "./components/Header";
@@ -41,6 +42,7 @@ import {
   faArrowDownZA,
   faArrowUpAZ,
   faArrowDownLong,
+  faPen,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faStar,
@@ -62,7 +64,8 @@ library.add(
   faChevronRight,
   faArrowDownZA,
   faArrowUpAZ,
-  faArrowDownLong
+  faArrowDownLong,
+  faPen
 );
 
 function App() {
@@ -189,10 +192,15 @@ function App() {
             element={
               <Profile
                 user={user}
+                token={token}
                 profileModalVisible={profileModalVisible}
                 setProfileModalVisible={setProfileModalVisible}
               />
             }
+          />
+          <Route
+            path="/add-listing"
+            element={<AddListing user={user} token={token} />}
           />
           <Route
             path="/user/login"

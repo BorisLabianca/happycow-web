@@ -1,11 +1,17 @@
 // Import des dépendances
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { Navigate } from "react-router-dom";
 
 // Import de Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Profile = ({ user, profileModalVisible, setProfileModalVisible }) => {
+const Profile = ({
+  user,
+  token,
+  profileModalVisible,
+  setProfileModalVisible,
+}) => {
   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState();
 
@@ -16,7 +22,7 @@ const Profile = ({ user, profileModalVisible, setProfileModalVisible }) => {
           `http://localhost:4000/user/profile/${user._id}`,
           {
             headers: {
-              authorization: `Bearer ${user.token}`,
+              authorization: `Bearer ${token}`,
               "Content-Type": "multipart/form-data",
             },
           }
@@ -29,43 +35,57 @@ const Profile = ({ user, profileModalVisible, setProfileModalVisible }) => {
       }
     };
     fetchUserInfo();
-  }, [user]);
+  }, [user, token]);
 
-  return loading ? (
-    <div>Loading...</div>
-  ) : (
-    <div className="container">
-      <div className="profile-main">
-        <div className="avatar-div">
-          {!userInfo.avatar ? (
-            <img
-              src="https://res.cloudinary.com/dbe27rnpk/image/upload/v1670078435/happycow/avatar_filler_yolhht.svg"
-              alt="User avatar"
-              className="profile-avatar"
-            />
-          ) : (
-            <img
-              src={userInfo.avatar}
-              alt="User avatar"
-              className="profile-avatar"
-            />
-          )}
+  return token ? (
+    loading ? (
+      <div>Loading...</div>
+    ) : (
+      <div className="container">
+        <div className="profile-main">
+          <div className="avatar-div">
+            {!userInfo.avatar ? (
+              <img
+                src="https://res.cloudinary.com/dbe27rnpk/image/upload/v1670078435/happycow/avatar_filler_yolhht.svg"
+                alt="User avatar"
+                className="profile-avatar"
+              />
+            ) : (
+              <img
+                src={userInfo.avatar}
+                alt="User avatar"
+                className="profile-avatar"
+              />
+            )}
 
-          <div
-            className="avatar-upload-div"
-            onClick={() => {
-              setProfileModalVisible(!profileModalVisible);
-            }}
-          >
-            <FontAwesomeIcon icon="camera" className="avatar-upload-icon" />
+            <div
+              className="avatar-upload-div"
+              onClick={() => {
+                setProfileModalVisible(!profileModalVisible);
+              }}
+            >
+              <FontAwesomeIcon icon="camera" className="avatar-upload-icon" />
+            </div>
+          </div>
+          <div className="info-div">
+            <div className="only-info">
+              <p className="profile-page-username">{userInfo.username}</p>
+              <p className="profile-page-email">{userInfo.email}</p>
+              <p className="profile-page-location">{userInfo.location}</p>
+            </div>
+            <FontAwesomeIcon
+              icon="pen"
+              className="info-edit-button"
+              onClick={() => {
+                setProfileModalVisible(!profileModalVisible);
+              }}
+            />
           </div>
         </div>
-
-        <p>Username: {userInfo.username}</p>
-        <p>Email: {userInfo.email}</p>
-        <p>Location: {userInfo.location}</p>
       </div>
-    </div>
+    )
+  ) : (
+    <Navigate to="/user/login" />
   );
 };
 

@@ -72,7 +72,12 @@ const Header = ({ token, handleToken, user, handleUser }) => {
         </div>
       ) : (
         <div className="user-nav">
-          <Link className="header-add-fav-btn">Add Listing</Link>
+          <Link
+            to={token ? "/add-listing" : "/user/login"}
+            className="header-add-fav-btn"
+          >
+            Add Listing
+          </Link>
           <Link to="/user/login" className="header-log-sign-btn">
             Login / Join
           </Link>
