@@ -15,7 +15,7 @@ const FilterButton = ({
     setCategoryButtons(newCategoryButtons);
     const newParams = { ...params };
     const indexOfCat = newParams.category.indexOf(cat);
-    console.log(indexOfCat);
+    // console.log(indexOfCat);
     if (indexOfCat !== -1) {
       newParams.category.splice(indexOfCat, 1);
       setParams(newParams);

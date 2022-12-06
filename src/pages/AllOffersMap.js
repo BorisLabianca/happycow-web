@@ -1,6 +1,6 @@
 // Imports des dépendances
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import axios from "axios";
 
 // Imports de Leaflet
@@ -12,6 +12,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // Import des composants
 import LocationCardAllOffersMap from "../components/LocationCardAllOffersMap";
 import FilterButton from "../components/FilterButton";
+import SearchBar from "../components/SearchBar";
 
 // Import des fonctions
 import ratings from "../functions/ratings";
@@ -19,24 +20,22 @@ import markerIcon from "../functions/markerIcon";
 
 // Import des JSON
 import restaurantTypes from "../restaurantTypes.json";
-import restaurantSort from "../restaurantSort.json";
+// import restaurantSort from "../restaurantSort.json";
 
-// // Import des icônes
-// import vegOption from "../assets/veg_options_marker.svg";
-// import healthStore from "../assets/health_store_marker.svg";
-// import vegShop from "../assets/veg_shop_marker.svg";
-// import bakery from "../assets/bakery_marker.svg";
-// import hotel from "../assets/bnb_hotel_marker.svg";
-// import delivery from "../assets/delivery_marker.svg";
-// import catering from "../assets/catering_marker.svg";
-// import organization from "../assets/organization_marker.svg";
-// import foodTruck from "../assets/food_truck_marker.svg";
-// import iceCream from "../assets/ice_cream_marker.svg";
-// import juiceBar from "../assets/juice_bar_marker.svg";
-// import professional from "../assets/vegan_professional_marker.svg";
-// import other from "../assets/other_marker.svg";
-
-const AllOffersMap = ({ latitude, longitude }) => {
+const AllOffersMap = ({
+  latitude,
+  longitude,
+  suggestions,
+  text,
+  setText,
+  onChangeHandler,
+  onSuggestHandler,
+  setSuggestions,
+}) => {
+  const location = useLocation();
+  const [nameFilter, setNameFilter] = useState(
+    location.state ? location.state.name : ""
+  );
   const [loading, setLoading] = useState(true);
   const [restaurants, setRestaurants] = useState([]);
   const [categoryButtons, setCategoryButtons] = useState(
@@ -45,7 +44,7 @@ const AllOffersMap = ({ latitude, longitude }) => {
     })
   );
   const [sortButtons, setSortButtons] = useState([false, false, false]);
-  const [params, setParams] = useState({ category: [], sort: null });
+  const [params, setParams] = useState({ category: [], sort: null, name: "" });
   const handleSort = (index, sortType) => {
     const newSortButtons = [...sortButtons];
     if (index === 0) {
@@ -69,7 +68,32 @@ const AllOffersMap = ({ latitude, longitude }) => {
       setParams(newParams);
     }
   };
-
+  if (nameFilter) {
+    const newParams = { ...params };
+    newParams.name = nameFilter;
+    setParams(newParams);
+    setNameFilter("");
+  }
+  const handleResetFilters = () => {
+    const newParams = { ...params };
+    newParams.category = [];
+    newParams.name = "";
+    newParams.sort = null;
+    const newSortButtons = [...sortButtons];
+    newSortButtons.splice(0, 3, false, false, false);
+    setSortButtons(newSortButtons);
+    const newCategoryButtons = [
+      ...categoryButtons.map((cat) => {
+        return false;
+      }),
+    ];
+    newCategoryButtons.map((cat) => {
+      return false;
+    });
+    setCategoryButtons(newCategoryButtons);
+    setParams(newParams);
+  };
+  // console.log(params);
   useEffect(() => {
     const fetchShops = async () => {
       try {
@@ -86,55 +110,21 @@ const AllOffersMap = ({ latitude, longitude }) => {
     fetchShops();
   }, [params]);
 
-  // const markerIcon = (cat) => {
-  //   if (cat === 0 || cat === 11) {
-  //     const icon = new Icon({ iconUrl: vegOption });
-  //     return icon;
-  //   } else if (cat === 1) {
-  //     const icon = new Icon({ iconUrl: healthStore });
-  //     return icon;
-  //   } else if (cat === 2) {
-  //     const icon = new Icon({ iconUrl: vegShop });
-  //     return icon;
-  //   } else if (cat === 3) {
-  //     const icon = new Icon({ iconUrl: bakery });
-  //     return icon;
-  //   } else if (cat === 4) {
-  //     const icon = new Icon({ iconUrl: hotel });
-  //     return icon;
-  //   } else if (cat === 5) {
-  //     const icon = new Icon({ iconUrl: delivery });
-  //     return icon;
-  //   } else if (cat === 6) {
-  //     const icon = new Icon({ iconUrl: catering });
-  //     return icon;
-  //   } else if (cat === 7) {
-  //     const icon = new Icon({ iconUrl: organization });
-  //     return icon;
-  //   } else if (cat === 10) {
-  //     const icon = new Icon({ iconUrl: foodTruck });
-  //     return icon;
-  //   } else if (cat === 12) {
-  //     const icon = new Icon({ iconUrl: iceCream });
-  //     return icon;
-  //   } else if (cat === 13) {
-  //     const icon = new Icon({ iconUrl: juiceBar });
-  //     return icon;
-  //   } else if (cat === 14) {
-  //     const icon = new Icon({ iconUrl: professional });
-  //     return icon;
-  //   } else if (cat === 99) {
-  //     const icon = new Icon({ iconUrl: other });
-  //     return icon;
-  //   }
-  // };
-  //   console.log(restaurants);
-
   return loading ? (
     <div>Loading...</div>
   ) : (
     <div className="all-offers-map">
       <div className="shops-part">
+        <SearchBar
+          text={text}
+          setText={setText}
+          onChangeHandler={onChangeHandler}
+          suggestions={suggestions}
+          onSuggestHandler={onSuggestHandler}
+          setSuggestions={setSuggestions}
+          params={params}
+          setParams={setParams}
+        />
         <div className="filter-div">
           {restaurantTypes.map((type, index) => {
             return (
@@ -189,6 +179,9 @@ const AllOffersMap = ({ latitude, longitude }) => {
             }}
           >
             Rating <FontAwesomeIcon icon="arrow-down-long" className="" />
+          </div>
+          <div className="reset-button" onClick={handleResetFilters}>
+            Reset filters
           </div>
         </div>
         <div className="shop-cards-div">

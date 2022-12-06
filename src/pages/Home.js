@@ -1,5 +1,5 @@
 // Import des dépendances
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 // Import des assets
 import banner from "../assets/bg_home_large_monday.webp";
@@ -7,14 +7,36 @@ import banner from "../assets/bg_home_large_monday.webp";
 
 // Import des composants
 import CategoryHome from "../components/CategoryHome";
+import SearchBar from "../components/SearchBar";
 
-const Home = ({ loading, latitude, longitude, restaurants }) => {
+const Home = ({
+  loading,
+  latitude,
+  longitude,
+  restaurants,
+  suggestions,
+  text,
+  onChangeHandler,
+  onSuggestHandler,
+  setSuggestions,
+  setText,
+}) => {
   return loading ? (
     <div>Loading...</div>
   ) : (
     <div>
       <div className="banner-div">
         <img src={banner} alt="Vegan burger in a plate." className="banner" />
+        <div className="search-bar">
+          <SearchBar
+            text={text}
+            setText={setText}
+            onChangeHandler={onChangeHandler}
+            suggestions={suggestions}
+            onSuggestHandler={onSuggestHandler}
+            setSuggestions={setSuggestions}
+          />
+        </div>
       </div>
       <div className="homepage-main">
         <div className="container">

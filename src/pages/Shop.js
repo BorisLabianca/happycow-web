@@ -133,11 +133,7 @@ const Shop = () => {
               <Marker
                 position={[shop.location.lat, shop.location.lng]}
                 icon={markerIcon(shop.category)}
-              >
-                <Popup>
-                  A pretty CSS3 popup. <br /> Easily customizable.
-                </Popup>
-              </Marker>
+              ></Marker>
             </MapContainer>
           </div>
           <div className="under-map-info">

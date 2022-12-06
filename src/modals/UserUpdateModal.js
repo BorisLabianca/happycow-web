@@ -5,7 +5,7 @@ import axios from "axios";
 // Import de Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const UserUpdateModal = ({ token, setProfileModalVisible }) => {
+const UserUpdateModal = ({ token, setProfileModalVisible, handleUser }) => {
   const [avatar, setAvatar] = useState("");
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
@@ -32,11 +32,22 @@ const UserUpdateModal = ({ token, setProfileModalVisible }) => {
           },
         }
       );
-      console.log(response.data);
+      //   console.log(response.data);
+      if (response.data) {
+        handleUser(response.data);
+      }
     } catch (error) {
       console.log(error.response.data.message);
       if (error.response.data.message === "Missing informations.") {
         setErrorMessage("Please change at least one piece of information.");
+      }
+      if (error.response.data.message === "This username is already used.") {
+        setErrorMessage("This username is already used.");
+      }
+      if (
+        error.response.data.message === "This email address is already used."
+      ) {
+        setErrorMessage("This email address is already used.");
       }
     }
   };

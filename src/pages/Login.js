@@ -34,7 +34,7 @@ const Login = ({ handleToken, handleUser }) => {
           email: email,
           password: password,
         });
-        console.log(response.data);
+        // console.log(response.data);
         if (response.data.token) {
           handleToken(response.data.token);
           handleUser(response.data);
