@@ -15,12 +15,12 @@ import markerIcon from "../functions/markerIcon";
 import priceClass from "../functions/priceClass";
 import restaurantTypeTag from "../functions/restaurantTypeTag";
 
-const Shop = () => {
+const Shop = ({ user, token }) => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [shop, setShop] = useState();
   // console.log(id);
-
+  const favoriteElements = {};
   useEffect(() => {
     const fetchShop = async () => {
       try {
@@ -87,6 +87,36 @@ const Shop = () => {
     return schedule;
   };
 
+  const handleAddToFavorite = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/user/addfavorite",
+        {
+          placeId: id,
+          name: shop.name,
+          address: shop.address,
+          location: shop.location,
+          phone: shop.phone,
+          thumbnail: shop.thumbnail,
+          type: shop.type,
+          category: shop.category,
+          rating: shop.rating,
+          vegan: shop.vegan,
+          vegOnly: shop.vegOnly,
+          price: shop.price,
+          owner: user._id,
+        },
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log(response.data);
+    } catch (error) {}
+  };
+  // console.log(shop);
+
   return loading ? (
     <div>Loading...</div>
   ) : (
@@ -101,6 +131,7 @@ const Shop = () => {
           <div className="shop-type">
             <span>{restaurantTypeTag(shop.category, shop.type)}</span>
           </div>
+          <button onClick={handleAddToFavorite}>add to favorite</button>
           <div className="pic-management">
             <div className="pic-mosaic">{mosaic(shop)}</div>
             {shop.pictures.length > 5 && (
@@ -151,7 +182,7 @@ const Shop = () => {
                 <div className="info-icon-container">
                   <FontAwesomeIcon icon="clock" className="shop-info-icon" />
                 </div>
-                <p>{openingTime(shop)}</p>{" "}
+                <p>{openingTime(shop)}</p>
               </div>
             )}
             <div className="individual-info">

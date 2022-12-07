@@ -18,6 +18,7 @@ import AddListing from "./pages/AddListing";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import UserUpdateModal from "./modals/UserUpdateModal";
+import ScroolToTop from "./components/ScrollToTop";
 
 // Import de Fontawesome
 import { library } from "@fortawesome/fontawesome-svg-core";
@@ -148,6 +149,7 @@ function App() {
   return (
     <div className="app">
       <Router>
+        <ScroolToTop />
         <Header
           handleToken={handleToken}
           token={token}
@@ -185,7 +187,10 @@ function App() {
               />
             }
           />
-          <Route path="/shop/:id" element={<Shop />} />
+          <Route
+            path="/shop/:id"
+            element={<Shop user={user} token={token} />}
+          />
           <Route path="/shop/:id/images" element={<Images />} />
           <Route
             path="user/profile"

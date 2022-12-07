@@ -14,6 +14,7 @@ const Profile = ({
 }) => {
   const [loading, setLoading] = useState(true);
   const [userInfo, setUserInfo] = useState();
+  const [favorites, setFavorites] = useState();
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -35,6 +36,22 @@ const Profile = ({
       }
     };
     fetchUserInfo();
+    const fetchFavorites = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:4000/user/favorites",
+          {
+            headers: {
+              authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        console.log(response.data);
+      } catch (error) {
+        console.log(error.response);
+      }
+    };
+    fetchFavorites();
   }, [user, token]);
 
   return token ? (
@@ -81,6 +98,7 @@ const Profile = ({
               }}
             />
           </div>
+          <div className="favorites-div"></div>
         </div>
       </div>
     )
