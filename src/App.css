@@ -666,6 +666,13 @@ body a {
 .profile-main {
   padding: 30px 0px;
   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 50px;
+}
+.personal-info-div {
+  display: flex;
+  align-items: center;
   justify-content: center;
   gap: 35px;
 }
@@ -739,6 +746,83 @@ body a {
   color: #5c48d3;
   font-size: 40px;
   cursor: pointer;
+}
+.favorites-div-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 20px;
+}
+.favorite-div-nav-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 30px;
+  font-weight: 600;
+  color: #444444;
+}
+.favorites-div-nav-title-icon {
+  color: #5c48d3;
+}
+.favorites-list {
+  display: flex;
+  gap: 25px;
+  width: 100%;
+}
+.favorite-card-profile-page {
+  width: calc(100% / 3 - 50px / 3);
+  height: 300px;
+}
+.favorite-shop-pic-profile-page-div {
+  height: 70%;
+  width: 100%;
+  position: relative;
+}
+.main-pic-favorite-profile-page {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+.bookmark-div-profile-page {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background-color: white;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 1px 1px 1px gray;
+}
+.bookmark-icon-profile-page {
+  font-size: 24px;
+  color: #5c48d3;
+}
+.favorite-profile-page-info {
+  height: 30%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+.title-and-icon-div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.favorite-name-profile-page {
+  font-size: 18px;
+  line-height: 24px;
+  font-weight: 600;
+  color: #444444;
+}
+.favorite-address-profile-page {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 24px;
+  color: #777777;
 }
 
 /* Style de la page Add-listing */
@@ -975,7 +1059,6 @@ footer a {
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
-  /* Pour que la modal prenne tout l'écran : */
   height: 100vh;
   width: 100vw;
   display: flex;

@@ -44,6 +44,7 @@ import {
   faArrowUpAZ,
   faArrowDownLong,
   faPen,
+  faBookmark,
 } from "@fortawesome/free-solid-svg-icons";
 library.add(
   faStar,
@@ -66,7 +67,8 @@ library.add(
   faArrowDownZA,
   faArrowUpAZ,
   faArrowDownLong,
-  faPen
+  faPen,
+  faBookmark
 );
 
 function App() {

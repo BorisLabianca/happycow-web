@@ -1,7 +1,10 @@
 // Import des dépendances
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Navigate } from "react-router-dom";
+import { Navigate, Link } from "react-router-dom";
+
+// Import des composants
+import FavoritesCarrousel from "../components/FavoritesCarrousel";
 
 // Import de Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -30,7 +33,6 @@ const Profile = ({
         );
         // console.log(response.data);
         setUserInfo(response.data);
-        setLoading(false);
       } catch (error) {
         console.log(error.response);
       }
@@ -46,7 +48,9 @@ const Profile = ({
             },
           }
         );
+        setFavorites(response.data);
         console.log(response.data);
+        setLoading(false);
       } catch (error) {
         console.log(error.response);
       }
@@ -60,45 +64,71 @@ const Profile = ({
     ) : (
       <div className="container">
         <div className="profile-main">
-          <div className="avatar-div">
-            {!userInfo.avatar ? (
-              <img
-                src="https://res.cloudinary.com/dbe27rnpk/image/upload/v1670078435/happycow/avatar_filler_yolhht.svg"
-                alt="User avatar"
-                className="profile-avatar"
-              />
-            ) : (
-              <img
-                src={userInfo.avatar}
-                alt="User avatar"
-                className="profile-avatar"
-              />
-            )}
+          <div className="personal-info-div">
+            <div className="avatar-div">
+              {!userInfo.avatar ? (
+                <img
+                  src="https://res.cloudinary.com/dbe27rnpk/image/upload/v1670078435/happycow/avatar_filler_yolhht.svg"
+                  alt="User avatar"
+                  className="profile-avatar"
+                />
+              ) : (
+                <img
+                  src={userInfo.avatar}
+                  alt="User avatar"
+                  className="profile-avatar"
+                />
+              )}
 
-            <div
-              className="avatar-upload-div"
-              onClick={() => {
-                setProfileModalVisible(!profileModalVisible);
-              }}
-            >
-              <FontAwesomeIcon icon="camera" className="avatar-upload-icon" />
+              <div
+                className="avatar-upload-div"
+                onClick={() => {
+                  setProfileModalVisible(!profileModalVisible);
+                }}
+              >
+                <FontAwesomeIcon icon="camera" className="avatar-upload-icon" />
+              </div>
+            </div>
+            <div className="info-div">
+              <div className="only-info">
+                <p className="profile-page-username">{userInfo.username}</p>
+                <p className="profile-page-email">{userInfo.email}</p>
+                <p className="profile-page-location">{userInfo.location}</p>
+              </div>
+              <FontAwesomeIcon
+                icon="pen"
+                className="info-edit-button"
+                onClick={() => {
+                  setProfileModalVisible(!profileModalVisible);
+                }}
+              />
             </div>
           </div>
-          <div className="info-div">
-            <div className="only-info">
-              <p className="profile-page-username">{userInfo.username}</p>
-              <p className="profile-page-email">{userInfo.email}</p>
-              <p className="profile-page-location">{userInfo.location}</p>
+          <div className="favorites-div">
+            <div className="favorites-div-nav">
+              <div className="favorite-div-nav-title">
+                <FontAwesomeIcon
+                  icon="bookmark"
+                  className="favorites-div-nav-title-icon"
+                />
+                {favorites && <span>{favorites.length}</span>}
+                <h2>Favorites</h2>
+              </div>
+
+              <Link>View All</Link>
             </div>
-            <FontAwesomeIcon
-              icon="pen"
-              className="info-edit-button"
-              onClick={() => {
-                setProfileModalVisible(!profileModalVisible);
-              }}
-            />
+            <div>
+              <FavoritesCarrousel favorites={favorites} />
+              {/* {favorites.map((favorite) => {
+                return (
+                  <FavoriteCardProfilePage
+                    key={favorite._id}
+                    favorite={favorite}
+                  />
+                );
+              })} */}
+            </div>
           </div>
-          <div className="favorites-div"></div>
         </div>
       </div>
     )
