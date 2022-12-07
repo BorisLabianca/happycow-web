@@ -7,7 +7,7 @@ import FavoriteCardProfilePage from "./FavoriteCardProfilePage";
 // Import de Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const FavoritesCarrousel = ({ favorites }) => {
+const FavoritesCarrousel = ({ favorites, handleDeleteFavorite }) => {
   const shopArray = [];
   for (let i = 0; i < favorites.length; i++) {
     if (shopArray.length < 10) {
@@ -15,6 +15,7 @@ const FavoritesCarrousel = ({ favorites }) => {
         <FavoriteCardProfilePage
           key={favorites[i]._id}
           favorites={favorites[i]}
+          handleDeleteFavorite={handleDeleteFavorite}
         />
       );
     }

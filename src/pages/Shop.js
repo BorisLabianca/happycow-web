@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
 
 // Import des composants
 import NearbyShop from "../components/NearbyShop";
@@ -15,12 +15,11 @@ import markerIcon from "../functions/markerIcon";
 import priceClass from "../functions/priceClass";
 import restaurantTypeTag from "../functions/restaurantTypeTag";
 
-const Shop = ({ user, token }) => {
+const Shop = ({ user, token, handleUser }) => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [shop, setShop] = useState();
   // console.log(id);
-  const favoriteElements = {};
   useEffect(() => {
     const fetchShop = async () => {
       try {
@@ -89,6 +88,7 @@ const Shop = ({ user, token }) => {
 
   const handleAddToFavorite = async () => {
     try {
+      setLoading(true);
       const response = await axios.post(
         "http://localhost:4000/user/addfavorite",
         {
@@ -112,8 +112,29 @@ const Shop = ({ user, token }) => {
           },
         }
       );
-      console.log(response.data);
-    } catch (error) {}
+      handleUser(response.data.userData);
+      setLoading(false);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleDeleteFavorite = async () => {
+    setLoading(true);
+    const response = await axios.delete(
+      "http://localhost:4000/user/delete-favorite",
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+        data: {
+          placeId: id,
+          userId: user._id,
+        },
+      }
+    );
+    handleUser(response.data);
+    setLoading(false);
   };
   // console.log(shop);
 
@@ -131,7 +152,19 @@ const Shop = ({ user, token }) => {
           <div className="shop-type">
             <span>{restaurantTypeTag(shop.category, shop.type)}</span>
           </div>
-          <button onClick={handleAddToFavorite}>add to favorite</button>
+          {user?.favorites?.indexOf(shop._id) === -1 ? (
+            <FontAwesomeIcon
+              icon="bookmark"
+              color="lightgrey"
+              onClick={handleAddToFavorite}
+            />
+          ) : (
+            <FontAwesomeIcon
+              icon="bookmark"
+              color="#7B4EC3"
+              onClick={handleDeleteFavorite}
+            />
+          )}
           <div className="pic-management">
             <div className="pic-mosaic">{mosaic(shop)}</div>
             {shop.pictures.length > 5 && (

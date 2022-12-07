@@ -8,18 +8,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import ratings from "../functions/ratings";
 import restaurantTypeIcon from "../functions/restaurantTypeIcon";
 
-const FavoriteCardProfilePage = ({ favorites, handleDeleteFavorite }) => {
-  //   console.log(favorites);
-  const address = favorites.address.split(",");
+const FavoriteCardFavoritesPage = ({ favorite, handleDeleteFavorite }) => {
+  //   console.log(favorite);
+  const address = favorite.address.split(",");
   const newAddress = address.slice(address.length - 3, address.length - 1);
 
   return (
     <div className="favorite-card-profile-page">
       <div className="favorite-shop-pic-profile-page-div">
-        <Link to={`/shop/${favorites.placeId}`}>
+        <Link to={`/shop/${favorite.placeId}`}>
           {" "}
           <img
-            src={favorites.thumbnail}
+            src={favorite.thumbnail}
             alt="Main pic"
             className="main-pic-favorite-profile-page"
           />
@@ -27,7 +27,7 @@ const FavoriteCardProfilePage = ({ favorites, handleDeleteFavorite }) => {
         <div
           className="bookmark-div-profile-page"
           onClick={() => {
-            handleDeleteFavorite(favorites.placeId, favorites.owner);
+            handleDeleteFavorite(favorite.placeId, favorite.owner);
           }}
         >
           <FontAwesomeIcon
@@ -39,13 +39,13 @@ const FavoriteCardProfilePage = ({ favorites, handleDeleteFavorite }) => {
 
       <div className="favorite-profile-page-info">
         <div className="title-and-icon-div">
-          <span>{restaurantTypeIcon(favorites.category)} </span>
-          <h2 className="favorite-name-profile-page">{favorites.name}</h2>
+          <span>{restaurantTypeIcon(favorite.category)} </span>
+          <h2 className="favorite-name-profile-page">{favorite.name}</h2>
         </div>
         <p className="favorite-address-profile-page">{newAddress.toString()}</p>
-        <p>{ratings(favorites.rating)}</p>
+        <p>{ratings(favorite.rating)}</p>
       </div>
     </div>
   );
 };
-export default FavoriteCardProfilePage;
+export default FavoriteCardFavoritesPage;

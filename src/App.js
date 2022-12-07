@@ -13,6 +13,7 @@ import Images from "./pages/Images";
 import AllOffersMap from "./pages/AllOffersMap";
 import Profile from "./pages/Profile";
 import AddListing from "./pages/AddListing";
+import Favorites from "./pages/Favorites";
 
 // Import des composants
 import Header from "./components/Header";
@@ -191,7 +192,7 @@ function App() {
           />
           <Route
             path="/shop/:id"
-            element={<Shop user={user} token={token} />}
+            element={<Shop user={user} token={token} handleUser={handleUser} />}
           />
           <Route path="/shop/:id/images" element={<Images />} />
           <Route
@@ -199,12 +200,14 @@ function App() {
             element={
               <Profile
                 user={user}
+                handleUser={handleUser}
                 token={token}
                 profileModalVisible={profileModalVisible}
                 setProfileModalVisible={setProfileModalVisible}
               />
             }
           />
+          <Route path="/user/favorites" element={<Favorites token={token} />} />
           <Route
             path="/add-listing"
             element={<AddListing user={user} token={token} />}

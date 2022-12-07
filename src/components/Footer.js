@@ -2,7 +2,7 @@ import { useLocation } from "react-router-dom";
 
 const Footer = ({ tech, techSite, place, placeSite, author, linkedin }) => {
   const { pathname } = useLocation();
-  if (pathname === "/alloffersmap") {
+  if (pathname === "/alloffersmap" || pathname === "/user/favorites") {
     return null;
   }
   return (

@@ -11,13 +11,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Profile = ({
   user,
+  handleUser,
   token,
   profileModalVisible,
   setProfileModalVisible,
 }) => {
   const [loading, setLoading] = useState(true);
-  const [userInfo, setUserInfo] = useState();
-  const [favorites, setFavorites] = useState();
+  const [userInfo, setUserInfo] = useState("");
+  const [favorites, setFavorites] = useState("");
 
   useEffect(() => {
     const fetchUserInfo = async () => {
@@ -31,16 +32,7 @@ const Profile = ({
             },
           }
         );
-        // console.log(response.data);
-        setUserInfo(response.data);
-      } catch (error) {
-        console.log(error.response);
-      }
-    };
-    fetchUserInfo();
-    const fetchFavorites = async () => {
-      try {
-        const response = await axios.get(
+        const favorites = await axios.get(
           "http://localhost:4000/user/favorites",
           {
             headers: {
@@ -48,15 +40,34 @@ const Profile = ({
             },
           }
         );
-        setFavorites(response.data);
-        console.log(response.data);
+        // console.log(response.data);
+        setUserInfo(response.data);
+        setFavorites(favorites.data);
         setLoading(false);
       } catch (error) {
-        console.log(error.response);
+        console.log(error);
       }
     };
-    fetchFavorites();
-  }, [user, token]);
+    fetchUserInfo();
+  }, [user, token, handleUser]);
+
+  const handleDeleteFavorite = async (placeId, userId) => {
+    setLoading(true);
+    const response = await axios.delete(
+      "http://localhost:4000/user/delete-favorite",
+      {
+        headers: {
+          authorization: `Bearer ${token}`,
+        },
+        data: {
+          placeId: placeId,
+          userId: userId,
+        },
+      }
+    );
+    handleUser(response.data);
+    setLoading(false);
+  };
 
   return token ? (
     loading ? (
@@ -115,10 +126,13 @@ const Profile = ({
                 <h2>Favorites</h2>
               </div>
 
-              <Link>View All</Link>
+              <Link to="/user/favorites">View All</Link>
             </div>
             <div>
-              <FavoritesCarrousel favorites={favorites} />
+              <FavoritesCarrousel
+                favorites={favorites}
+                handleDeleteFavorite={handleDeleteFavorite}
+              />
               {/* {favorites.map((favorite) => {
                 return (
                   <FavoriteCardProfilePage
