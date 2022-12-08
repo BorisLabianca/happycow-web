@@ -10,6 +10,7 @@ const UserUpdateModal = ({ token, setProfileModalVisible, handleUser }) => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [location, setLocation] = useState("");
+  const [preferences, setPreferences] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -21,6 +22,7 @@ const UserUpdateModal = ({ token, setProfileModalVisible, handleUser }) => {
       formData.append("username", username);
       formData.append("email", email);
       formData.append("location", location);
+      formData.append("preferences", preferences);
 
       const response = await axios.put(
         "http://localhost:4000/user/update",
@@ -42,14 +44,17 @@ const UserUpdateModal = ({ token, setProfileModalVisible, handleUser }) => {
       console.log(error);
       if (error.response?.data.message === "Missing informations.") {
         setErrorMessage("Please change at least one piece of information.");
+        setLoading(false);
       }
       if (error.response?.data.message === "This username is already used.") {
         setErrorMessage("This username is already used.");
+        setLoading(false);
       }
       if (
         error.response?.data.message === "This email address is already used."
       ) {
         setErrorMessage("This email address is already used.");
+        setLoading(false);
       }
     }
   };
@@ -123,6 +128,22 @@ const UserUpdateModal = ({ token, setProfileModalVisible, handleUser }) => {
               setLocation(event.target.value);
             }}
           />
+          <select
+            name="prefenreces"
+            id="preferences"
+            onChange={(event) => {
+              setPreferences(event.target.value);
+            }}
+          >
+            <option value="">Choose a new preference</option>
+            <option value="Vegan">Vegan</option>
+            <option value="Vegetarian">Vegetarian</option>
+            <option value="Raw">Raw</option>
+            <option value="Mostly Veg">Mostly Veg</option>
+            <option value="Non Veg">Non Veg</option>
+            <option value="Herbivore">Herbivore</option>
+            <option value="Fruitarian">Fruitarian</option>
+          </select>
           <div className="error-message">{errorMessage}</div>
           <button
             type="button"

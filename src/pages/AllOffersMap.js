@@ -104,7 +104,7 @@ const AllOffersMap = ({
 
   const handleResetFilters = () => {
     location.state.name = "";
-    console.log(location.state.name);
+    // console.log(location.state.name);
     setNameFilter("");
     const newParams = { ...params };
     newParams.category = [];
@@ -147,7 +147,7 @@ const AllOffersMap = ({
         const response = await axios.get("http://localhost:4000/allshops", {
           params,
         });
-        console.log(params);
+        // console.log(params);
         setRestaurants(response.data);
         setLoading(false);
       } catch (error) {

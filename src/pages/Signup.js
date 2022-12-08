@@ -15,6 +15,7 @@ const Signup = ({ handleToken, handleUser }) => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [livingArea, setLivingArea] = useState("");
+  const [preferences, setPreferences] = useState("");
   const [password, setPassword] = useState("");
   const [passwordConfirmation, setPasswordConfirmation] = useState("");
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -27,7 +28,7 @@ const Signup = ({ handleToken, handleUser }) => {
     event.preventDefault();
     setErrorMessage("");
     try {
-      if (!email || !username || !password) {
+      if (!email || !username || !livingArea || !preferences || !password) {
         setErrorMessage("Veuillez remplir tous les champs.");
         return;
       } else if (password.length < 8) {
@@ -43,6 +44,7 @@ const Signup = ({ handleToken, handleUser }) => {
           email: email,
           username: username,
           location: livingArea,
+          preferences: preferences,
           password: password,
         });
         // console.log(response.data);
@@ -136,6 +138,25 @@ const Signup = ({ handleToken, handleUser }) => {
                   setLivingArea(event.target.value);
                 }}
               />
+            </div>
+            <div className="preferences-div-signup">
+              <label for="preferences">Preferences</label>
+              <select
+                name="preferences"
+                id="preferences"
+                onChange={(event) => {
+                  setPreferences(event.target.value);
+                }}
+              >
+                <option value="">Choose a preference</option>
+                <option value="Vegan">Vegan</option>
+                <option value="Vegetarian">Vegetarian</option>
+                <option value="Raw">Raw</option>
+                <option value="Mostly Veg">Mostly Veg</option>
+                <option value="Non Veg">Non Veg</option>
+                <option value="Herbivore">Herbivore</option>
+                <option value="Fruitarian">Fruitarian</option>
+              </select>
             </div>
             <div className="password-div-signup">
               <span>Password</span>

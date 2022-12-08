@@ -6,6 +6,9 @@ import { Navigate, Link } from "react-router-dom";
 // Import des composants
 import FavoritesCarrousel from "../components/FavoritesCarrousel";
 
+// Import des fonctions
+import handleStyle from "../functions/handleStyle";
+
 // Import de Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -110,6 +113,12 @@ const Profile = ({
                 <p className="profile-page-username">{userInfo.username}</p>
                 <p className="profile-page-email">{userInfo.email}</p>
                 <p className="profile-page-location">{userInfo.location}</p>
+                <p
+                  className="profile-page-preferences"
+                  style={handleStyle(userInfo.preferences)}
+                >
+                  {userInfo.preferences}
+                </p>
               </div>
               <FontAwesomeIcon
                 icon="pen"
@@ -120,6 +129,7 @@ const Profile = ({
               />
             </div>
           </div>
+          <div className="separation-div"></div>
           <div className="favorites-div">
             <div className="favorites-div-nav">
               <div className="favorite-div-nav-title">

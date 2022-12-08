@@ -144,43 +144,65 @@ const Shop = ({ user, token, handleUser }) => {
     <div className="container">
       <div className="shop-container">
         <div className="shop-left-side">
-          <h2>{shop.name}</h2>
-          <div className="price-and-rate">
-            <span>{ratings(shop.rating)}</span>
-            <span>{priceClass(shop.price)}</span>
+          <div className="top-div">
+            <div className="top-div-info">
+              <div className="top-div-left">
+                <h2>{shop.name}</h2>
+                <div className="price-and-rate">
+                  <span>{ratings(shop.rating)}</span>
+                  <span>{priceClass(shop.price)}</span>
+                </div>
+                <div className="shop-type">
+                  <span>{restaurantTypeTag(shop.category, shop.type)}</span>
+                </div>
+              </div>
+              <div className="top-div-right">
+                {user?.favorites?.indexOf(shop._id) === -1 ? (
+                  <FontAwesomeIcon
+                    icon="bookmark"
+                    color="lightgrey"
+                    className="favorite-icon"
+                    onClick={handleAddToFavorite}
+                  />
+                ) : (
+                  <FontAwesomeIcon
+                    icon="bookmark"
+                    color="#7B4EC3"
+                    className="favorite-icon"
+                    onClick={handleDeleteFavorite}
+                  />
+                )}
+              </div>
+            </div>
+            <div className="pic-management">
+              <div className="pic-mosaic">{mosaic(shop)}</div>
+              {shop.pictures.length > 5 && (
+                <Link
+                  to={`/shop/${shop._id}/images`}
+                  state={{ store: shop }}
+                  className="more-pics"
+                >
+                  <FontAwesomeIcon icon="camera" color="white" />{" "}
+                  <span className="more-pics-text">
+                    All Photos ({shop.pictures.length})
+                  </span>
+                </Link>
+              )}
+            </div>
+            <p className="full-desc">{shop.description}</p>
+            <div className="add-review-and-photo">
+              <div className="add-review">
+                <FontAwesomeIcon icon="pen" />
+                <p>Add Review</p>
+              </div>
+              <div className="add-photo">
+                <FontAwesomeIcon icon="camera" />
+                <p>Add Photos</p>
+              </div>
+            </div>
           </div>
-          <div className="shop-type">
-            <span>{restaurantTypeTag(shop.category, shop.type)}</span>
-          </div>
-          {user?.favorites?.indexOf(shop._id) === -1 ? (
-            <FontAwesomeIcon
-              icon="bookmark"
-              color="lightgrey"
-              onClick={handleAddToFavorite}
-            />
-          ) : (
-            <FontAwesomeIcon
-              icon="bookmark"
-              color="#7B4EC3"
-              onClick={handleDeleteFavorite}
-            />
-          )}
-          <div className="pic-management">
-            <div className="pic-mosaic">{mosaic(shop)}</div>
-            {shop.pictures.length > 5 && (
-              <Link
-                to={`/shop/${shop._id}/images`}
-                state={{ store: shop }}
-                className="more-pics"
-              >
-                <FontAwesomeIcon icon="camera" color="white" />{" "}
-                <span className="more-pics-text">
-                  All Photos ({shop.pictures.length})
-                </span>
-              </Link>
-            )}
-          </div>
-          <p className="full-desc">{shop.description}</p>
+          <div className="separation-div" style={{ marginTop: "35px" }}></div>
+          <div className="reviews-div"></div>
         </div>
         <div className="shop-right-side">
           <div className="map">
