@@ -39,7 +39,7 @@ const FavoritesCarrousel = ({ favorites, handleDeleteFavorite }) => {
     newArray.push(shopArray[end]);
     setItemsToDisplay(newArray);
   };
-  console.log(itemsToDisplay);
+  // console.log(itemsToDisplay);
   return (
     <div className="items">
       {startSlide === 0 ? null : (

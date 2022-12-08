@@ -2,12 +2,12 @@ import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
-
+import { FaFacebookF } from "react-icons/fa";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
 
 // Import des composants
 import NearbyShop from "../components/NearbyShop";
-import { FaFacebookF } from "react-icons/fa";
+import ReviewCard from "../components/ReviewCard";
 
 // Import des fonctions
 import ratings from "../functions/ratings";
@@ -19,14 +19,16 @@ const Shop = ({ user, token, handleUser }) => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [shop, setShop] = useState();
+  const [reviews, setReviews] = useState();
   // console.log(id);
   useEffect(() => {
     const fetchShop = async () => {
       try {
         const response = await axios.get(`http://localhost:4000/shop/${id}`);
-        // console.log(response.data);
+        console.log(response.data);
 
-        setShop(response.data);
+        setShop(response.data.shop);
+        setReviews(response.data.reviews);
         setLoading(false);
       } catch (error) {
         console.log(error.response);
@@ -157,7 +159,15 @@ const Shop = ({ user, token, handleUser }) => {
                 </div>
               </div>
               <div className="top-div-right">
-                {user?.favorites?.indexOf(shop._id) === -1 ? (
+                {!token ? (
+                  <Link to="/user/login">
+                    <FontAwesomeIcon
+                      icon="bookmark"
+                      color="lightgrey"
+                      className="favorite-icon"
+                    />
+                  </Link>
+                ) : user?.favorites?.indexOf(shop._id) === -1 ? (
                   <FontAwesomeIcon
                     icon="bookmark"
                     color="lightgrey"
@@ -202,7 +212,11 @@ const Shop = ({ user, token, handleUser }) => {
             </div>
           </div>
           <div className="separation-div" style={{ marginTop: "35px" }}></div>
-          <div className="reviews-div"></div>
+          <div className="reviews-div">
+            {reviews.map((review) => {
+              return <ReviewCard key={review._id} review={review} />;
+            })}
+          </div>
         </div>
         <div className="shop-right-side">
           <div className="map">

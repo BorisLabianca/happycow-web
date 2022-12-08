@@ -35,6 +35,7 @@ const Profile = ({
             },
           }
         );
+        console.log(response.data);
         const favorites = await axios.get(
           "http://localhost:4000/user/favorites",
           {
