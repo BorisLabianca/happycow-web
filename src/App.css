@@ -167,12 +167,15 @@ body a {
   cursor: pointer;
   border: 1px solid lightgray;
   width: 100%;
+  max-height: 300px;
   border-radius: 5px;
   box-shadow: 1px 1px 5px lightgrey;
   padding: 15px;
   background-color: white;
   display: flex;
   flex-direction: column;
+  box-sizing: border-box;
+  overflow: scroll;
 }
 .suggestion {
   line-height: 35px;
@@ -404,6 +407,27 @@ body a {
   border-radius: 5px;
   padding: 5px;
   color: white;
+  cursor: pointer;
+}
+.pagination-div {
+  display: flex;
+  gap: 10px;
+  margin-left: 25px;
+}
+.limit-button-unchecked {
+  width: fit-content;
+  border: 1px solid #444444;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+.limit-button-checked {
+  width: fit-content;
+  border: 1px solid #5c48d3;
+  background-color: #5c48d3;
+  color: white;
+  border-radius: 5px;
+  padding: 5px;
   cursor: pointer;
 }
 .shop-cards-div {

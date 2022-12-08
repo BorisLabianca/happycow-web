@@ -51,6 +51,10 @@ const Profile = ({
     fetchUserInfo();
   }, [user, token, handleUser]);
 
+  const refreshPage = () => {
+    window.location.reload(false);
+  };
+
   const handleDeleteFavorite = async (placeId, userId) => {
     setLoading(true);
     const response = await axios.delete(
@@ -67,8 +71,9 @@ const Profile = ({
     );
     handleUser(response.data);
     setLoading(false);
+    refreshPage();
   };
-
+  // console.log(favorites);
   return token ? (
     loading ? (
       <div>Loading...</div>

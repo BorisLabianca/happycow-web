@@ -20,7 +20,6 @@ const FavoritesCarrousel = ({ favorites, handleDeleteFavorite }) => {
       );
     }
   }
-
   const [startSlide, setStartSlide] = useState(0);
   const [itemsToDisplay, setItemsToDisplay] = useState(shopArray.slice(0, 3));
   const end = startSlide + 3;
@@ -40,7 +39,7 @@ const FavoritesCarrousel = ({ favorites, handleDeleteFavorite }) => {
     newArray.push(shopArray[end]);
     setItemsToDisplay(newArray);
   };
-  // console.log(favorites);
+  console.log(itemsToDisplay);
   return (
     <div className="items">
       {startSlide === 0 ? null : (
@@ -51,7 +50,7 @@ const FavoritesCarrousel = ({ favorites, handleDeleteFavorite }) => {
         />
       )}
       <div className="favorites-list">{itemsToDisplay}</div>
-      {end === shopArray.length ? null : (
+      {end === shopArray.length || shopArray.length < 4 ? null : (
         <FontAwesomeIcon
           icon="circle-right"
           className="arrow-right"

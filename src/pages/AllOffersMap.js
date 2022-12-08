@@ -44,7 +44,15 @@ const AllOffersMap = ({
     })
   );
   const [sortButtons, setSortButtons] = useState([false, false, false]);
-  const [params, setParams] = useState({ category: [], sort: null, name: "" });
+  const [params, setParams] = useState({
+    category: [],
+    sort: null,
+    name: "",
+    limit: 81,
+    skip: 0,
+  });
+  const [limitButtons, setLimitButtons] = useState([false, false, true]);
+
   const handleSort = (index, sortType) => {
     const newSortButtons = [...sortButtons];
     if (index === 0) {
@@ -68,13 +76,36 @@ const AllOffersMap = ({
       setParams(newParams);
     }
   };
+
+  const handleLimit = (index, limitType) => {
+    const newLimitButtons = [...limitButtons];
+    if (index === 0) {
+      newLimitButtons.splice(0, 3, true, false, false);
+    } else if (index === 1) {
+      newLimitButtons.splice(0, 3, false, true, false);
+    } else if (index === 2) {
+      newLimitButtons.splice(0, 3, false, false, true);
+    }
+    setLimitButtons(newLimitButtons);
+    const newParams = { ...params };
+    if (newParams.limit !== limitType) {
+      newParams.limit = limitType;
+      newParams.skip = 0;
+      setParams(newParams);
+    }
+  };
+
   if (nameFilter) {
     const newParams = { ...params };
     newParams.name = nameFilter;
     setParams(newParams);
     setNameFilter("");
   }
+
   const handleResetFilters = () => {
+    location.state.name = "";
+    console.log(location.state.name);
+    setNameFilter("");
     const newParams = { ...params };
     newParams.category = [];
     newParams.name = "";
@@ -93,6 +124,22 @@ const AllOffersMap = ({
     setCategoryButtons(newCategoryButtons);
     setParams(newParams);
   };
+
+  const handlePrevious = () => {
+    if (params.skip !== 0) {
+      const newParams = { ...params };
+      newParams.skip = Number(params.skip) - Number(params.limit);
+      setParams(newParams);
+    }
+  };
+
+  const handleNext = () => {
+    if (Number(restaurants.count) - Number(params.skip) > params.limit) {
+      const newParams = { ...params };
+      newParams.skip = Number(params.skip) + Number(params.limit);
+      setParams(newParams);
+    }
+  };
   // console.log(params);
   useEffect(() => {
     const fetchShops = async () => {
@@ -100,7 +147,7 @@ const AllOffersMap = ({
         const response = await axios.get("http://localhost:4000/allshops", {
           params,
         });
-        // console.log(response.data.shops);
+        console.log(params);
         setRestaurants(response.data);
         setLoading(false);
       } catch (error) {
@@ -182,6 +229,61 @@ const AllOffersMap = ({
           </div>
           <div className="reset-button" onClick={handleResetFilters}>
             Reset filters
+          </div>
+          <div className="pagination-div">
+            <div className="limit-div">
+              <div
+                className={
+                  limitButtons[0] === true
+                    ? "limit-button-checked"
+                    : "limit-button-unchecked"
+                }
+                onClick={() => {
+                  handleLimit(0, 18);
+                }}
+              >
+                18
+              </div>
+              <div
+                className={
+                  limitButtons[1] === true
+                    ? "limit-button-checked"
+                    : "limit-button-unchecked"
+                }
+                onClick={() => {
+                  handleLimit(1, 27);
+                }}
+              >
+                27
+              </div>
+              <div
+                className={
+                  limitButtons[2] === true
+                    ? "limit-button-checked"
+                    : "limit-button-unchecked"
+                }
+                onClick={() => {
+                  handleLimit(2, 81);
+                }}
+              >
+                81
+              </div>
+            </div>
+            <div className="pages-div">
+              <div
+                onClick={handlePrevious}
+                className={params.skip === 0 ? "disabled" : "prev-btn"}
+              >
+                Prev
+              </div>
+              <div className="page-count">
+                {Number(params.skip) / Number(params.limit) + 1} /{" "}
+                {Math.ceil(restaurants.count / restaurants.shops.length)}
+              </div>
+              <div onClick={handleNext} className="next-btn">
+                Next
+              </div>
+            </div>
           </div>
         </div>
         <div className="shop-cards-div">
