@@ -19,6 +19,7 @@ import Favorites from "./pages/Favorites";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import UserUpdateModal from "./modals/UserUpdateModal";
+import AddReviewModal from "./modals/AddReviewModal";
 import ScroolToTop from "./components/ScrollToTop";
 
 // Import de Fontawesome
@@ -109,6 +110,10 @@ function App() {
   const [longitude, setLongitude] = useState("");
   const [restaurants, setRestaurants] = useState([]);
   const [profileModalVisible, setProfileModalVisible] = useState(false);
+  const [addReviewModalVisible, setAddReviewModalVisible] = useState([
+    false,
+    "",
+  ]);
 
   useEffect(() => {
     const fetchLocation = async () => {
@@ -192,7 +197,14 @@ function App() {
           />
           <Route
             path="/shop/:id"
-            element={<Shop user={user} token={token} handleUser={handleUser} />}
+            element={
+              <Shop
+                user={user}
+                token={token}
+                handleUser={handleUser}
+                setAddReviewModalVisible={setAddReviewModalVisible}
+              />
+            }
           />
           <Route path="/shop/:id/images" element={<Images />} />
           <Route
@@ -239,6 +251,14 @@ function App() {
             setProfileModalVisible={setProfileModalVisible}
             token={token}
             handleUser={handleUser}
+          />
+        )}
+        {addReviewModalVisible[0] && (
+          <AddReviewModal
+            token={token}
+            user={user}
+            addReviewModalVisible={addReviewModalVisible}
+            setAddReviewModalVisible={setAddReviewModalVisible}
           />
         )}
       </Router>

@@ -15,7 +15,7 @@ import markerIcon from "../functions/markerIcon";
 import priceClass from "../functions/priceClass";
 import restaurantTypeTag from "../functions/restaurantTypeTag";
 
-const Shop = ({ user, token, handleUser }) => {
+const Shop = ({ user, token, handleUser, setAddReviewModalVisible }) => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [shop, setShop] = useState();
@@ -201,10 +201,25 @@ const Shop = ({ user, token, handleUser }) => {
             </div>
             <p className="full-desc">{shop.description}</p>
             <div className="add-review-and-photo">
-              <div className="add-review">
-                <FontAwesomeIcon icon="pen" />
-                <p>Add Review</p>
-              </div>
+              {token ? (
+                <div
+                  className="add-review"
+                  onClick={() => {
+                    setAddReviewModalVisible([true, user._id]);
+                  }}
+                >
+                  <FontAwesomeIcon icon="pen" />
+                  <p>Add Review</p>
+                </div>
+              ) : (
+                <Link to="/user/login">
+                  <div className="add-review">
+                    <FontAwesomeIcon icon="pen" />
+                    <p>Add Review</p>
+                  </div>
+                </Link>
+              )}
+
               <div className="add-photo">
                 <FontAwesomeIcon icon="camera" />
                 <p>Add Photos</p>
