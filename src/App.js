@@ -238,7 +238,16 @@ function App() {
               />
             }
           />
-          <Route path="/user/favorites" element={<Favorites token={token} />} />
+          <Route
+            path="/user/favorites"
+            element={
+              <Favorites
+                token={token}
+                latitude={localStorage.getItem("latitude")}
+                longitude={localStorage.getItem("longitude")}
+              />
+            }
+          />
           <Route
             path="/add-listing"
             element={<AddListing user={user} token={token} />}

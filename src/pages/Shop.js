@@ -130,21 +130,25 @@ const Shop = ({
   };
 
   const handleDeleteFavorite = async () => {
-    setLoading(true);
-    const response = await axios.delete(
-      "https://site--happycow-backend--67k4ycyfnl9b.code.run/user/delete-favorite",
-      {
-        headers: {
-          authorization: `Bearer ${token}`,
-        },
-        data: {
-          placeId: id,
-          userId: user._id,
-        },
-      }
-    );
-    handleUser(response.data);
-    setLoading(false);
+    try {
+      setLoading(true);
+      const response = await axios.delete(
+        "https://site--happycow-backend--67k4ycyfnl9b.code.run/user/delete-favorite",
+        {
+          headers: {
+            authorization: `Bearer ${token}`,
+          },
+          data: {
+            placeId: id,
+            userId: user._id,
+          },
+        }
+      );
+      handleUser(response.data);
+      setLoading(false);
+    } catch (error) {
+      console.log("Shop page error >> : ", error);
+    }
   };
   // console.log(shop);
 

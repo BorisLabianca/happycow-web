@@ -13,7 +13,7 @@ import FavoriteCardFavoritesPage from "../components/FavoriteCardFavoritesPage";
 import markerIcon from "../functions/markerIcon";
 import ratings from "../functions/ratings";
 
-const Favorites = ({ token }) => {
+const Favorites = ({ token, latitude, longitude }) => {
   const [loading, setLoading] = useState(true);
   const [favorites, setFavorites] = useState("");
 
@@ -37,24 +37,36 @@ const Favorites = ({ token }) => {
     };
     fetchFavorites();
   }, [token]);
+
+  // console.log(favorites);
   return token ? (
     loading ? (
       <div>Loading...</div>
     ) : (
       <div className="favorites-main">
-        <div className="favorites-left-part">
-          {favorites.map((favorite) => {
-            return (
-              <FavoriteCardFavoritesPage
-                key={favorite._id}
-                favorite={favorite}
-              />
-            );
-          })}
-        </div>
+        {favorites.length > 0 ? (
+          <div className="favorites-left-part">
+            {favorites.map((favorite) => {
+              return (
+                <FavoriteCardFavoritesPage
+                  key={favorite._id}
+                  favorite={favorite}
+                />
+              );
+            })}
+          </div>
+        ) : (
+          <div className="favorites-left-part-empty">
+            Vous n'avez pas encore de favoris.
+          </div>
+        )}
         <div className="favorites-right-part">
           <MapContainer
-            center={[favorites[0].location.lat, favorites[0].location.lng]}
+            center={
+              favorites.length > 0
+                ? [favorites[0].location.lat, favorites[0].location.lng]
+                : [latitude, longitude]
+            }
             zoom={13}
             scrollWheelZoom={false}
             className="map-favorites"
@@ -68,38 +80,39 @@ const Favorites = ({ token }) => {
               A pretty CSS3 popup. <br /> Easily customizable.
             </Popup>
           </Marker> */}
-            {favorites.map((favorite) => {
-              return (
-                <Marker
-                  position={[favorite.location.lat, favorite.location.lng]}
-                  icon={markerIcon(favorite.category)}
-                  key={favorite.placeId}
-                >
-                  <Popup maxWidth={300} className="map-popup">
-                    <Link to={`/shop/${favorite._id}`}>
-                      {favorite.thumbnail !==
-                      "https://www.happycow.net/img/no-image.jpg" ? (
-                        <img
-                          src={favorite.thumbnail}
-                          alt="Shop"
-                          width={130}
-                          className="shop-card-pic-top"
-                        />
-                      ) : (
-                        <img
-                          src="https://res.cloudinary.com/dbe27rnpk/image/upload/v1669731791/happycow/broken_link_vyoton.png"
-                          alt="Filler"
-                        />
-                      )}
-                      <p>{favorite.name}</p>
-                      <div>{ratings(favorite.rating)}</div>
-                      <p>{favorite.address}</p>
-                      <p>{favorite.phone}</p>
-                    </Link>
-                  </Popup>
-                </Marker>
-              );
-            })}
+            {favorites.length > 0 &&
+              favorites.map((favorite) => {
+                return (
+                  <Marker
+                    position={[favorite.location.lat, favorite.location.lng]}
+                    icon={markerIcon(favorite.category)}
+                    key={favorite.placeId}
+                  >
+                    <Popup maxWidth={300} className="map-popup">
+                      <Link to={`/shop/${favorite._id}`}>
+                        {favorite.thumbnail !==
+                        "https://www.happycow.net/img/no-image.jpg" ? (
+                          <img
+                            src={favorite.thumbnail}
+                            alt="Shop"
+                            width={130}
+                            className="shop-card-pic-top"
+                          />
+                        ) : (
+                          <img
+                            src="https://res.cloudinary.com/dbe27rnpk/image/upload/v1669731791/happycow/broken_link_vyoton.png"
+                            alt="Filler"
+                          />
+                        )}
+                        <p>{favorite.name}</p>
+                        <div>{ratings(favorite.rating)}</div>
+                        <p>{favorite.address}</p>
+                        <p>{favorite.phone}</p>
+                      </Link>
+                    </Popup>
+                  </Marker>
+                );
+              })}
           </MapContainer>
         </div>
       </div>
