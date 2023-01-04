@@ -104,6 +104,7 @@ body a {
   right: 0;
   top: 38px;
   background-color: #7c4ec4;
+  color: white;
   min-width: 160px;
   overflow: auto;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -413,6 +414,54 @@ body a {
   display: flex;
   gap: 10px;
   margin-left: 25px;
+  align-items: center;
+}
+.limit-div {
+  display: flex;
+  gap: 10px;
+}
+.pages-div {
+  display: flex;
+  gap: 5px;
+}
+.page-count {
+  border: 1px solid #444444;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 500;
+}
+.prev-btn,
+.next-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  width: fit-content;
+  border: 1px solid #5c48d3;
+  background-color: #5c48d3;
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+.disabled {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+  width: fit-content;
+  border: 1px solid #9182ea;
+  background-color: #9182ea;
+  border-radius: 5px;
+  padding: 5px;
+  color: white;
+  cursor: not-allowed;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 .limit-button-unchecked {
   width: fit-content;
@@ -1173,7 +1222,7 @@ footer a {
   position: relative;
 }
 .profile-modal-root {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);
@@ -1297,7 +1346,7 @@ footer a {
 
 /* Style de la modal AddReviewModal */
 .add-review-modal-root {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.5);

@@ -20,7 +20,11 @@ const SearchBar = ({
       setParams(newParams);
       setText("");
     } else {
-      navigate("/alloffersmap", { state: { name: text } });
+      const newParams = { ...params };
+      newParams.name = text;
+      setParams(newParams);
+      navigate("/alloffersmap");
+      // navigate("/alloffersmap", { state: { name: text } });
       setText("");
     }
     setSuggestions([]);
@@ -58,9 +62,13 @@ const SearchBar = ({
                     setParams(newParams);
                     setText("");
                   } else {
-                    navigate("/alloffersmap", {
-                      state: { name: suggestion.name },
-                    });
+                    const newParams = { ...params };
+                    newParams.name = suggestion.name;
+                    setParams(newParams);
+                    navigate("/alloffersmap");
+                    // navigate("/alloffersmap", {
+                    //   state: { name: suggestion.name },
+                    // });
                     setText("");
                   }
                   setSuggestions([]);

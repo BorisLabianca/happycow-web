@@ -1,6 +1,3 @@
-// Import des dépendances
-import { useState } from "react";
-
 // Import des assets
 import banner from "../assets/bg_home_large_monday.webp";
 // import restaurants from "../restaurants.json";
@@ -20,6 +17,8 @@ const Home = ({
   onSuggestHandler,
   setSuggestions,
   setText,
+  params,
+  setParams,
 }) => {
   return loading ? (
     <div>Loading...</div>
@@ -35,6 +34,8 @@ const Home = ({
             suggestions={suggestions}
             onSuggestHandler={onSuggestHandler}
             setSuggestions={setSuggestions}
+            params={params}
+            setParams={setParams}
           />
         </div>
       </div>

@@ -14,6 +14,7 @@ const AddReviewModal = ({
   user,
   addReviewModalVisible,
   setAddReviewModalVisible,
+  placeId,
 }) => {
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
@@ -28,13 +29,17 @@ const AddReviewModal = ({
     try {
       setLoading(true);
       const formData = new FormData();
-      //   formData.append("avatar", avatar);
-      //   formData.append("username", username);
-      //   formData.append("email", email);
-      //   formData.append("location", location);
-      //   formData.append("preferences", preferences);
+      formData.append("title", title);
+      formData.append("review", review);
+      formData.append("rating", rating);
+      formData.append("pros", pros);
+      formData.append("cons", cons);
+      Object.keys(photos).forEach((photo) => {
+        formData.append("photos", photos[photo]);
+      });
+      formData.append("placeId", placeId);
 
-      const response = await axios.put(
+      const response = await axios.post(
         "http://localhost:4000/shop/add-review",
         formData,
         {
@@ -53,17 +58,9 @@ const AddReviewModal = ({
     } catch (error) {
       console.log(error);
       if (error.response?.data.message === "Missing parameters.") {
-        setErrorMessage("Please change at least one piece of information.");
-        setLoading(false);
-      }
-      if (error.response?.data.message === "This username is already used.") {
-        setErrorMessage("This username is already used.");
-        setLoading(false);
-      }
-      if (
-        error.response?.data.message === "This email address is already used."
-      ) {
-        setErrorMessage("This email address is already used.");
+        setErrorMessage(
+          "Please make sure to give a title, rate the shop and write a review."
+        );
         setLoading(false);
       }
     }
@@ -72,6 +69,8 @@ const AddReviewModal = ({
     const dropDown = document.getElementById("rating");
     dropDown.selectedIndex = 0;
   };
+
+  console.log(placeId);
   return token ? (
     loading ? (
       <div>Loading...</div>

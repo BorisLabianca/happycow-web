@@ -15,7 +15,13 @@ import markerIcon from "../functions/markerIcon";
 import priceClass from "../functions/priceClass";
 import restaurantTypeTag from "../functions/restaurantTypeTag";
 
-const Shop = ({ user, token, handleUser, setAddReviewModalVisible }) => {
+const Shop = ({
+  user,
+  token,
+  handleUser,
+  setAddReviewModalVisible,
+  setPlaceId,
+}) => {
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [shop, setShop] = useState();
@@ -205,6 +211,7 @@ const Shop = ({ user, token, handleUser, setAddReviewModalVisible }) => {
                 <div
                   className="add-review"
                   onClick={() => {
+                    setPlaceId(id);
                     setAddReviewModalVisible([true, user._id]);
                   }}
                 >

@@ -106,8 +106,8 @@ function App() {
     }
   };
   const [loading, setLoading] = useState(true);
-  const [latitude, setLatitude] = useState("");
-  const [longitude, setLongitude] = useState("");
+  // const [latitude, setLatitude] = useState("");
+  // const [longitude, setLongitude] = useState("");
   const [restaurants, setRestaurants] = useState([]);
   const [profileModalVisible, setProfileModalVisible] = useState(false);
   const [addReviewModalVisible, setAddReviewModalVisible] = useState([
@@ -118,8 +118,10 @@ function App() {
   useEffect(() => {
     const fetchLocation = async () => {
       await navigator.geolocation.getCurrentPosition((position) => {
-        setLatitude(Number(position.coords.latitude));
-        setLongitude(Number(position.coords.longitude));
+        localStorage.setItem("latitude", Number(position.coords.latitude));
+        localStorage.setItem("longitude", Number(position.coords.longitude));
+        // setLatitude(Number(position.coords.latitude));
+        // setLongitude(Number(position.coords.longitude));
         // console.log(position);
       });
     };
@@ -153,6 +155,16 @@ function App() {
     // console.log(matches);
     setText(text);
   };
+  const [params, setParams] = useState({
+    category: [],
+    sort: null,
+    name: "",
+    limit: 81,
+    skip: 0,
+  });
+
+  // State pour gérer l'envoi de l'id du magasin
+  const [placeId, setPlaceId] = useState("");
 
   return (
     <div className="app">
@@ -170,14 +182,16 @@ function App() {
             element={
               <Home
                 loading={loading}
-                latitude={latitude}
-                longitude={longitude}
+                latitude={localStorage.getItem("latitude")}
+                longitude={localStorage.getItem("longitude")}
                 restaurants={restaurants}
                 text={text}
                 setText={setText}
                 suggestions={suggestions}
                 onChangeHandler={onChangeHandler}
                 setSuggestions={setSuggestions}
+                params={params}
+                setParams={setParams}
               />
             }
           />
@@ -185,13 +199,15 @@ function App() {
             path="/alloffersmap"
             element={
               <AllOffersMap
-                latitude={latitude}
-                longitude={longitude}
+                latitude={localStorage.getItem("latitude")}
+                longitude={localStorage.getItem("longitude")}
                 text={text}
                 setText={setText}
                 suggestions={suggestions}
                 onChangeHandler={onChangeHandler}
                 setSuggestions={setSuggestions}
+                params={params}
+                setParams={setParams}
               />
             }
           />
@@ -203,6 +219,7 @@ function App() {
                 token={token}
                 handleUser={handleUser}
                 setAddReviewModalVisible={setAddReviewModalVisible}
+                setPlaceId={setPlaceId}
               />
             }
           />
@@ -259,6 +276,7 @@ function App() {
             user={user}
             addReviewModalVisible={addReviewModalVisible}
             setAddReviewModalVisible={setAddReviewModalVisible}
+            placeId={placeId}
           />
         )}
       </Router>

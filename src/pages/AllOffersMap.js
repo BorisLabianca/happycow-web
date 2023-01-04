@@ -1,6 +1,6 @@
 // Imports des dépendances
 import { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 // Imports de Leaflet
@@ -31,11 +31,13 @@ const AllOffersMap = ({
   onChangeHandler,
   onSuggestHandler,
   setSuggestions,
+  params,
+  setParams,
 }) => {
-  const location = useLocation();
-  const [nameFilter, setNameFilter] = useState(
-    location.state ? location.state.name : ""
-  );
+  // const location = useLocation();
+  // const [nameFilter, setNameFilter] = useState(
+  //   location.state ? location.state.name : ""
+  // );
   const [loading, setLoading] = useState(true);
   const [restaurants, setRestaurants] = useState([]);
   const [categoryButtons, setCategoryButtons] = useState(
@@ -44,13 +46,13 @@ const AllOffersMap = ({
     })
   );
   const [sortButtons, setSortButtons] = useState([false, false, false]);
-  const [params, setParams] = useState({
-    category: [],
-    sort: null,
-    name: "",
-    limit: 81,
-    skip: 0,
-  });
+  // const [params, setParams] = useState({
+  //   category: [],
+  //   sort: null,
+  //   name: "",
+  //   limit: 81,
+  //   skip: 0,
+  // });
   const [limitButtons, setLimitButtons] = useState([false, false, true]);
 
   const handleSort = (index, sortType) => {
@@ -95,17 +97,19 @@ const AllOffersMap = ({
     }
   };
 
-  if (nameFilter) {
-    const newParams = { ...params };
-    newParams.name = nameFilter;
-    setParams(newParams);
-    setNameFilter("");
-  }
+  // if (params.name) {
+  //   const newParams = { ...params };
+  //   newParams.name = JSON.parse(localStorage.getItem("name"));
+  //   console.log(newParams.name);
+  //   setParams(newParams);
+  //   localStorage.removeItem("name");
+  //   // setNameFilter("");
+  // }
 
   const handleResetFilters = () => {
-    location.state.name = "";
+    // location.state.name = "";
     // console.log(location.state.name);
-    setNameFilter("");
+    // setNameFilter("");
     const newParams = { ...params };
     newParams.category = [];
     newParams.name = "";
@@ -140,7 +144,7 @@ const AllOffersMap = ({
       setParams(newParams);
     }
   };
-  // console.log(params);
+  // console.log(restaurants.shops.length);
   useEffect(() => {
     const fetchShops = async () => {
       try {
@@ -278,9 +282,17 @@ const AllOffersMap = ({
               </div>
               <div className="page-count">
                 {Number(params.skip) / Number(params.limit) + 1} /{" "}
-                {Math.ceil(restaurants.count / restaurants.shops.length)}
+                {Math.ceil(restaurants.count / params.limit)}
               </div>
-              <div onClick={handleNext} className="next-btn">
+              <div
+                onClick={handleNext}
+                className={
+                  Number(params.skip) / Number(params.limit) + 1 ===
+                  params.limit
+                    ? "disabled"
+                    : "next-btn"
+                }
+              >
                 Next
               </div>
             </div>
