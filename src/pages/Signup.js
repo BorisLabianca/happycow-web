@@ -140,7 +140,7 @@ const Signup = ({ handleToken, handleUser }) => {
               />
             </div>
             <div className="preferences-div-signup">
-              <label for="preferences">Preferences</label>
+              <label htmlFor="preferences">Preferences</label>
               <select
                 name="preferences"
                 id="preferences"

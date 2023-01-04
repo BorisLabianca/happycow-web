@@ -49,7 +49,7 @@ const AddReviewModal = ({
           },
         }
       );
-      //   console.log(response.data);
+      console.log(response.data);
       //   if (response.data) {
       //     handleUser(response.data);
       //   }

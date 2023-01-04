@@ -130,7 +130,7 @@ function App() {
     const fetchShops = async () => {
       try {
         const response = await axios.get("http://localhost:4000/allshops");
-        // console.log(response.data);
+        console.log(response.data);
         setRestaurants(response.data);
         setLoading(false);
       } catch (error) {
