@@ -40,13 +40,16 @@ const Signup = ({ handleToken, handleUser }) => {
         setErrorMessage("Vos deux mots de passe doivent être identiques.");
         return;
       } else {
-        const response = await axios.post("http://localhost:4000/user/signup", {
-          email: email,
-          username: username,
-          location: livingArea,
-          preferences: preferences,
-          password: password,
-        });
+        const response = await axios.post(
+          "https://site--happycow-backend--67k4ycyfnl9b.code.run/user/signup",
+          {
+            email: email,
+            username: username,
+            location: livingArea,
+            preferences: preferences,
+            password: password,
+          }
+        );
         // console.log(response.data);
         if (response.data.token) {
           handleToken(response.data.token);

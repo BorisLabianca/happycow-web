@@ -129,7 +129,9 @@ function App() {
 
     const fetchShops = async () => {
       try {
-        const response = await axios.get("http://localhost:4000/allshops");
+        const response = await axios.get(
+          "https://site--happycow-backend--67k4ycyfnl9b.code.run/allshops"
+        );
         console.log(response.data);
         setRestaurants(response.data);
         setLoading(false);

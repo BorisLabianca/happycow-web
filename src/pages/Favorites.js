@@ -21,7 +21,7 @@ const Favorites = ({ token }) => {
     const fetchFavorites = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:4000/user/favorites",
+          "https://site--happycow-backend--67k4ycyfnl9b.code.run/user/favorites",
           {
             headers: {
               authorization: `Bearer ${token}`,

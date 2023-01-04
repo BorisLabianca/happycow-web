@@ -13,7 +13,7 @@ const NearbyShop = ({ placeId, coords }) => {
     const fetchShop = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/near?placeId=${placeId}`
+          `https://site--happycow-backend--67k4ycyfnl9b.code.run/near?placeId=${placeId}`
         );
         // console.log(response.data);
         setShop(response.data);

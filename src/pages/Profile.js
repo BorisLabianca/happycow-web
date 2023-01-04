@@ -27,7 +27,7 @@ const Profile = ({
     const fetchUserInfo = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:4000/user/profile/${user._id}`,
+          `https://site--happycow-backend--67k4ycyfnl9b.code.run/user/profile/${user._id}`,
           {
             headers: {
               authorization: `Bearer ${token}`,
@@ -37,7 +37,7 @@ const Profile = ({
         );
         console.log(response.data);
         const favorites = await axios.get(
-          "http://localhost:4000/user/favorites",
+          "https://site--happycow-backend--67k4ycyfnl9b.code.run/user/favorites",
           {
             headers: {
               authorization: `Bearer ${token}`,
@@ -62,7 +62,7 @@ const Profile = ({
   const handleDeleteFavorite = async (placeId, userId) => {
     setLoading(true);
     const response = await axios.delete(
-      "http://localhost:4000/user/delete-favorite",
+      "https://site--happycow-backend--67k4ycyfnl9b.code.run/user/delete-favorite",
       {
         headers: {
           authorization: `Bearer ${token}`,

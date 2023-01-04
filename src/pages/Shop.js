@@ -30,7 +30,9 @@ const Shop = ({
   useEffect(() => {
     const fetchShop = async () => {
       try {
-        const response = await axios.get(`http://localhost:4000/shop/${id}`);
+        const response = await axios.get(
+          `https://site--happycow-backend--67k4ycyfnl9b.code.run/shop/${id}`
+        );
         console.log(response.data);
 
         setShop(response.data.shop);
@@ -98,7 +100,7 @@ const Shop = ({
     try {
       setLoading(true);
       const response = await axios.post(
-        "http://localhost:4000/user/addfavorite",
+        "https://site--happycow-backend--67k4ycyfnl9b.code.run/user/addfavorite",
         {
           placeId: id,
           name: shop.name,
@@ -130,7 +132,7 @@ const Shop = ({
   const handleDeleteFavorite = async () => {
     setLoading(true);
     const response = await axios.delete(
-      "http://localhost:4000/user/delete-favorite",
+      "https://site--happycow-backend--67k4ycyfnl9b.code.run/user/delete-favorite",
       {
         headers: {
           authorization: `Bearer ${token}`,

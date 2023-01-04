@@ -25,7 +25,7 @@ const UserUpdateModal = ({ token, setProfileModalVisible, handleUser }) => {
       formData.append("preferences", preferences);
 
       const response = await axios.put(
-        "http://localhost:4000/user/update",
+        "https://site--happycow-backend--67k4ycyfnl9b.code.run/user/update",
         formData,
         {
           headers: {

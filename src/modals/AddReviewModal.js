@@ -40,7 +40,7 @@ const AddReviewModal = ({
       formData.append("placeId", placeId);
 
       const response = await axios.post(
-        "http://localhost:4000/shop/add-review",
+        "https://site--happycow-backend--67k4ycyfnl9b.code.run/shop/add-review",
         formData,
         {
           headers: {
