@@ -291,7 +291,7 @@ const AllOffersMap = ({
                 onClick={handleNext}
                 className={
                   Number(params.skip) / Number(params.limit) + 1 ===
-                  params.limit
+                  Math.ceil(restaurants.count / params.limit)
                     ? "disabled"
                     : "next-btn"
                 }
