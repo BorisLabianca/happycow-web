@@ -977,6 +977,11 @@ body a {
 .favorites-div-nav-title-icon {
   color: #5c48d3;
 }
+.profile-view-all-favorites {
+  font-size: 20px;
+  font-weight: 500;
+  color: #7c4ec4;
+}
 .favorites-list {
   display: flex;
   gap: 25px;
@@ -1570,4 +1575,12 @@ footer a {
   border-radius: 5px;
   border: 1px solid #988cdd;
   cursor: not-allowed;
+}
+
+/* Style du loader */
+.loader-div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 224px);
 }

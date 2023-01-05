@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { Navigate, Link } from "react-router-dom";
+import { MutatingDots } from "react-loader-spinner";
 
 // Import des composants
 import FavoritesCarrousel from "../components/FavoritesCarrousel";
@@ -80,7 +81,19 @@ const Profile = ({
   // console.log(favorites);
   return token ? (
     loading ? (
-      <div>Loading...</div>
+      <div className="loader-div">
+        <MutatingDots
+          height="100"
+          width="100"
+          color="#4fa94d"
+          secondaryColor="#4fa94d"
+          radius="12.5"
+          ariaLabel="mutating-dots-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
     ) : (
       <div className="container">
         <div className="profile-main">
@@ -142,7 +155,9 @@ const Profile = ({
                 <h2>Favorites</h2>
               </div>
 
-              <Link to="/user/favorites">View All</Link>
+              <Link to="/user/favorites" className="profile-view-all-favorites">
+                View All
+              </Link>
             </div>
             <div>
               <FavoritesCarrousel

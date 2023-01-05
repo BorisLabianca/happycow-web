@@ -1,3 +1,5 @@
+import { MutatingDots } from "react-loader-spinner";
+
 // Import des assets
 import banner from "../assets/bg_home_large_monday.webp";
 // import restaurants from "../restaurants.json";
@@ -21,7 +23,19 @@ const Home = ({
   setParams,
 }) => {
   return loading ? (
-    <div>Loading...</div>
+    <div className="loader-div">
+      <MutatingDots
+        height="100"
+        width="100"
+        color="#4fa94d"
+        secondaryColor="#4fa94d"
+        radius="12.5"
+        ariaLabel="mutating-dots-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        visible={true}
+      />
+    </div>
   ) : (
     <div>
       <div className="banner-div">

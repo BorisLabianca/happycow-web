@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { MutatingDots } from "react-loader-spinner";
 
 // Imports de Leaflet
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
@@ -165,7 +166,19 @@ const AllOffersMap = ({
   }, [params]);
 
   return loading ? (
-    <div>Loading...</div>
+    <div className="loader-div">
+      <MutatingDots
+        height="100"
+        width="100"
+        color="#4fa94d"
+        secondaryColor="#4fa94d"
+        radius="12.5"
+        ariaLabel="mutating-dots-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        visible={true}
+      />
+    </div>
   ) : (
     <div className="all-offers-map">
       <div className="shops-part">

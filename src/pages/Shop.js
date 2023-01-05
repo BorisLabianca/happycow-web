@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { FaFacebookF } from "react-icons/fa";
 import { MapContainer, TileLayer, Marker } from "react-leaflet";
+import { MutatingDots } from "react-loader-spinner";
 
 // Import des composants
 import NearbyShop from "../components/NearbyShop";
@@ -144,6 +145,7 @@ const Shop = ({
           },
         }
       );
+      // console.log(response.data);
       handleUser(response.data);
       setLoading(false);
     } catch (error) {
@@ -153,7 +155,19 @@ const Shop = ({
   // console.log(shop);
 
   return loading ? (
-    <div>Loading...</div>
+    <div className="loader-div">
+      <MutatingDots
+        height="100"
+        width="100"
+        color="#4fa94d"
+        secondaryColor="#4fa94d"
+        radius="12.5"
+        ariaLabel="mutating-dots-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        visible={true}
+      />
+    </div>
   ) : (
     <div className="container">
       <div className="shop-container">

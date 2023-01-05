@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link, Navigate } from "react-router-dom";
+import { MutatingDots } from "react-loader-spinner";
 
 // Imports de Leaflet
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
@@ -41,7 +42,19 @@ const Favorites = ({ token, latitude, longitude }) => {
   // console.log(favorites);
   return token ? (
     loading ? (
-      <div>Loading...</div>
+      <div className="loader-div">
+        <MutatingDots
+          height="100"
+          width="100"
+          color="#4fa94d"
+          secondaryColor="#4fa94d"
+          radius="12.5"
+          ariaLabel="mutating-dots-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
     ) : (
       <div className="favorites-main">
         {favorites.length > 0 ? (
