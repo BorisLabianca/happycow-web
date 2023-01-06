@@ -1080,6 +1080,184 @@ body a {
 /* Style de la page Add-listing */
 .add-listing-main {
   padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  min-height: calc(100vh - 228.5px);
+  box-sizing: border-box;
+}
+.add-listing-main h1 {
+  font-size: 30px;
+  font-weight: 600;
+  color: #444444;
+}
+.type-selection-div {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+.shop-card-type-container {
+  width: calc(100% / 5 - 125px / 5);
+  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+.serves-flesh-or-fish {
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  min-height: calc(100vh - 228.5px);
+  box-sizing: border-box;
+}
+.go-back {
+  display: flex;
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: #7c4ec4;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 5px;
+  gap: 10px;
+  cursor: pointer;
+}
+.serves-flesh-or-fish h1 {
+  font-size: 30px;
+  font-weight: 600;
+  color: #444444;
+}
+.yes-or-no {
+  display: flex;
+  gap: 15px;
+}
+.yes-or-no p {
+  height: 100px;
+  width: 100px;
+  border-radius: 50%;
+  background-color: #7c4ec4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 24px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.sorry {
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  min-height: calc(100vh - 228.5px);
+  box-sizing: border-box;
+}
+.sorry h1 {
+  font-size: 30px;
+  font-weight: 600;
+  color: #444444;
+  align-self: center;
+}
+.sorry p {
+  font-size: 20px;
+  align-self: center;
+}
+.sorry a {
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  width: fit-content;
+  box-sizing: border-box;
+  color: white;
+  background-color: #7c4ec4;
+  font-size: 20px;
+  font-weight: 600;
+  border-radius: 5px;
+  align-self: center;
+}
+.add-listing-info {
+  padding: 30px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  min-height: calc(100vh - 228.5px);
+  box-sizing: border-box;
+}
+.add-listing-info input {
+  height: 30px;
+  width: 500px;
+  font-size: 18px;
+  padding: 10px;
+  border: 1px solid #c3ccce;
+  border-radius: 5px;
+}
+.add-listing-business-name-div,
+.add-listing-phone-number-div,
+.add-listing-street-div,
+.add-listing-city-div,
+.add-listing-zipcode-div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.business-name-input-and-tag {
+  display: flex;
+  gap: 35px;
+}
+.business-name-input-and-tag .tag-rounded-corner {
+  margin-bottom: 0;
+  height: 30px;
+  padding: 10px;
+  font-size: 20px;
+}
+.add-listing-set-location-div {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.set-location {
+  display: flex;
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: #7c4ec4;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 5px;
+  gap: 10px;
+  cursor: pointer;
+}
+.set-location-disabled {
+  display: flex;
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: #9182ea;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 5px;
+  gap: 10px;
+  cursor: not-allowed;
+}
+.add-listing-map {
+  height: 500px;
+  width: 100%;
 }
 
 /* Style de la page login */
@@ -1303,14 +1481,15 @@ body a {
 }
 
 /* Style du Footer */
-footer {
-  font-size: 14px;
+.footer {
+  font-size: 16px;
   display: flex;
   justify-content: center;
   align-items: baseline;
   gap: 5px;
   color: #5c48d3;
   margin: 100px 0 50px 0;
+  box-sizing: border-box;
 }
 footer a {
   text-decoration: none;
@@ -1321,6 +1500,7 @@ footer a {
 /* Style de la modal profileupdate */
 .app {
   position: relative;
+  height: fit-content;
 }
 .profile-modal-root {
   position: fixed;
