@@ -27,8 +27,8 @@ const Home = ({
       <MutatingDots
         height="100"
         width="100"
-        color="#4fa94d"
-        secondaryColor="#4fa94d"
+        color="#7c4ec4"
+        secondaryColor="#7c4ec4"
         radius="12.5"
         ariaLabel="mutating-dots-loading"
         wrapperStyle={{}}

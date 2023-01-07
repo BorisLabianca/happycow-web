@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { MutatingDots } from "react-loader-spinner";
 
 import ratings from "../functions/ratings";
 
@@ -50,7 +51,19 @@ const NearbyShop = ({ placeId, coords }) => {
 
   // console.log(distance);
   return loading ? (
-    <div>Loading...</div>
+    <div className="loader-div">
+      <MutatingDots
+        height="50"
+        width="50"
+        color="#7c4ec4"
+        secondaryColor="#7c4ec4"
+        radius="12.5"
+        ariaLabel="mutating-dots-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        visible={true}
+      />
+    </div>
   ) : shop ? (
     <div className="nearby-container">
       <Link to={`/shop/${shop._id}`} className="nearby-pic-container">
