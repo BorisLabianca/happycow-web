@@ -18,11 +18,7 @@ const AddListingMap = ({ coords, shopType }) => {
         <Marker
           position={[coords[1], coords[0]]}
           icon={markerIcon(shopType.category)}
-        >
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
-        </Marker>
+        ></Marker>
       </MapContainer>
     </div>
   );
