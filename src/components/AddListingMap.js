@@ -1,11 +1,11 @@
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import { MapContainer, TileLayer, Marker } from "react-leaflet";
 import markerIcon from "../functions/markerIcon";
 
 const AddListingMap = ({ coords, shopType }) => {
   return (
     <div className="add-listing-map">
       <MapContainer
-        center={[coords[1], coords[0]]}
+        center={[coords.lat, coords.lng]}
         zoom={16}
         scrollWheelZoom={false}
         className="main-map"
@@ -16,7 +16,7 @@ const AddListingMap = ({ coords, shopType }) => {
         />
 
         <Marker
-          position={[coords[1], coords[0]]}
+          position={[coords.lat, coords.lng]}
           icon={markerIcon(shopType.category)}
         ></Marker>
       </MapContainer>

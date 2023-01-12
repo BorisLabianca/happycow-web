@@ -1188,12 +1188,48 @@ body a {
   align-self: center;
 }
 .add-listing-info {
-  padding: 30px 0;
+  margin: 30px 0;
+  padding: 10px;
   display: flex;
   flex-direction: column;
   gap: 30px;
   min-height: calc(100vh - 228.5px);
   box-sizing: border-box;
+  border: 1px solid #ababab;
+  border-radius: 10px;
+}
+.add-listing-info-nav {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ababab;
+  padding-bottom: 10px;
+}
+.add-listing-all-steps {
+  display: flex;
+  gap: 35px;
+}
+.nav-step {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+.nav-step p {
+  font-size: 20px;
+  font-weight: 400;
+  color: #444444;
+}
+.circle {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  border: 1px solid #ababab;
+  flex-shrink: 0;
+}
+.active {
+  border: 2px solid #7c4ec4;
 }
 .add-listing-info input {
   height: 30px;
@@ -1207,10 +1243,14 @@ body a {
 .add-listing-phone-number-div,
 .add-listing-street-div,
 .add-listing-city-div,
-.add-listing-zipcode-div {
+.add-listing-zipcode-div,
+.add-listing-website-div,
+.add-listing-facebook-div,
+.add-listing-instagram-div {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  font-size: 18px;
 }
 .business-name-input-and-tag {
   display: flex;
@@ -1258,6 +1298,111 @@ body a {
 .add-listing-map {
   height: 500px;
   width: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+}
+.validate-or-clear {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.clear-form {
+  display: flex;
+  gap: 10px;
+  align-items: baseline;
+  color: #7c4ec4;
+  cursor: pointer;
+}
+.validate {
+  display: flex;
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: #7c4ec4;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 5px;
+  gap: 10px;
+  cursor: pointer;
+}
+.add-listing-info textarea::placeholder {
+  font-family: "Poppins";
+  font-size: 16px;
+  color: #ababab;
+}
+.add-listing-info textarea {
+  font-family: "Poppins";
+  font-size: 16px;
+}
+.price-range {
+  display: flex;
+  gap: 15px;
+}
+.price-range-type {
+  display: flex;
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: #7c4ec4;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  width: fit-content;
+  height: fit-content;
+  border: 1px solid #7c4ec4;
+  border-radius: 5px;
+  gap: 10px;
+  cursor: pointer;
+}
+.price-range-type-not-selected {
+  display: flex;
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: white;
+  color: #7c4ec4;
+  font-size: 16px;
+  font-weight: 600;
+  width: fit-content;
+  height: fit-content;
+  border: 1px solid #7c4ec4;
+  border-radius: 5px;
+  gap: 10px;
+  cursor: pointer;
+}
+.add-listing-rating-div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 18px;
+}
+.add-listing-rating-div select {
+  width: 150px;
+  height: 26px;
+  font-size: 16px;
+}
+.pictures-container {
+  height: 180px;
+  border: 1px solid #444444;
+  border-radius: 5px;
+  display: flex;
+  overflow: scroll;
+  align-items: center;
+  padding: 15px;
+  gap: 20px;
+}
+.pictures-icon {
+  font-size: 50px;
+  color: #7c4ec4;
+  cursor: pointer;
+}
+.pictures-container input {
+  display: none;
+}
+.pictures-to-upload {
+  height: 150px;
+  width: auto;
+  border: 1px solid #444444;
 }
 
 /* Style de la page login */
@@ -1675,9 +1820,8 @@ footer a {
   border: 1px dashed #444444;
   border-radius: 5px;
   display: flex;
-  flex-wrap: wrap;
+  overflow: scroll;
   align-items: center;
-  justify-content: center;
   padding: 15px;
   gap: 20px;
 }
