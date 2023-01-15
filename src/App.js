@@ -177,6 +177,7 @@ function App() {
           token={token}
           handleUser={handleUser}
           user={user}
+          setParams={setParams}
         />
         <Routes>
           <Route

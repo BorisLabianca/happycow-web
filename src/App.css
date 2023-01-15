@@ -28,6 +28,7 @@ body a {
   display: flex;
   align-items: center;
   height: 100%;
+  cursor: pointer;
 }
 .home-btn {
   height: 36px;
@@ -163,6 +164,7 @@ body a {
   border-top-right-radius: 5px;
   color: white;
   box-sizing: border-box;
+  cursor: pointer;
 }
 .suggestions-div {
   cursor: pointer;
@@ -1326,6 +1328,26 @@ body a {
   border-radius: 5px;
   gap: 10px;
   cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+.validate-disabled {
+  display: flex;
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: #9182ea;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 5px;
+  gap: 10px;
+  cursor: not-allowed;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 .add-listing-info textarea::placeholder {
   font-family: "Poppins";
@@ -1403,6 +1425,24 @@ body a {
   height: 150px;
   width: auto;
   border: 1px solid #444444;
+}
+.addlisting-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+.after-addlisting-submit-message {
+  font-size: 26px;
+  font-weight: 500;
+  text-align: center;
+}
+.add-listing-info-after-submit {
+  height: calc(100vh - 228.5px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
 }
 
 /* Style de la page login */
@@ -1623,6 +1663,36 @@ body a {
   font-weight: 600;
   line-height: 24px;
   margin-top: 5px;
+}
+.signup-confirmation-page {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 228.5px);
+}
+.signup-confirmation-page h1 {
+  font-size: 26px;
+  font-weight: 500;
+  text-align: center;
+}
+.signup-confirmation-page .return-btn {
+  display: flex;
+  box-sizing: border-box;
+  padding: 10px;
+  background-color: #7c4ec4;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  width: fit-content;
+  height: fit-content;
+  border-radius: 5px;
+  gap: 10px;
+  cursor: pointer;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 /* Style du Footer */

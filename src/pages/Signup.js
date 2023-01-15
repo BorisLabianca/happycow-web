@@ -2,6 +2,7 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
+import { MutatingDots } from "react-loader-spinner";
 
 // Import de Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -23,6 +24,8 @@ const Signup = ({ handleToken, handleUser }) => {
     useState(false);
 
   const [errorMessage, setErrorMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [signupConfirmation, setSignupConfirmation] = useState(false);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -40,6 +43,7 @@ const Signup = ({ handleToken, handleUser }) => {
         setErrorMessage("Vos deux mots de passe doivent être identiques.");
         return;
       } else {
+        setLoading(true);
         const response = await axios.post(
           "https://site--happycow-backend--67k4ycyfnl9b.code.run/user/signup",
           {
@@ -54,11 +58,13 @@ const Signup = ({ handleToken, handleUser }) => {
         if (response.data.token) {
           handleToken(response.data.token);
           handleUser(response.data);
-          if (location.state?.previousUrl) {
-            navigate(location.state.previousUrl);
-          } else {
-            navigate("/");
-          }
+          setSignupConfirmation(true);
+          // if (location.state?.previousUrl) {
+          //   navigate(location.state.previousUrl);
+          // } else {
+          //   navigate("/");
+          // }
+          setLoading(false);
         }
       }
     } catch (error) {
@@ -82,9 +88,42 @@ const Signup = ({ handleToken, handleUser }) => {
       if (error.response?.data.message === "This username is already used.") {
         setErrorMessage("Ce nom d'utilisateur est déjà utilisé.");
       }
+      setLoading(false);
     }
   };
-  return (
+
+  const handleReturn = () => {
+    if (location.state?.previousUrl) {
+      setSignupConfirmation(false);
+      navigate(location.state.previousUrl);
+    } else {
+      setSignupConfirmation(false);
+      navigate("/");
+    }
+  };
+
+  return loading ? (
+    <div className="loader-div">
+      <MutatingDots
+        height="100"
+        width="100"
+        color="#7c4ec4"
+        secondaryColor="#7c4ec4"
+        radius="12.5"
+        ariaLabel="mutating-dots-loading"
+        wrapperStyle={{}}
+        wrapperClass=""
+        visible={true}
+      />
+    </div>
+  ) : signupConfirmation ? (
+    <div className="signup-confirmation-page">
+      <h1>Your account has been created.</h1>
+      <div onClick={handleReturn} className="return-btn">
+        Return
+      </div>
+    </div>
+  ) : (
     <div className="signup-main">
       <div className="signup-container">
         <div className="left-part">

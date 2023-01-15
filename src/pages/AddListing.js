@@ -1,7 +1,7 @@
 // Import des dépendances
-import { Navigate, Link } from "react-router-dom";
+import { Navigate, Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { FaArrowLeft, FaCamera } from "react-icons/fa";
+import { FaArrowLeft, FaCamera, FaTrash } from "react-icons/fa";
 import axios from "axios";
 import { MutatingDots } from "react-loader-spinner";
 
@@ -17,6 +17,7 @@ import restaurantTypeTag from "../functions/restaurantTypeTag";
 import restaurantTypes from "../restaurantTypes.json";
 
 const AddListing = ({ user, token }) => {
+  const navigate = useNavigate();
   const [shopType, setShopType] = useState("");
   const [animalOrigin, setAnimalOrigin] = useState("");
   const [businessName, setBusinessName] = useState("");
@@ -25,6 +26,7 @@ const AddListing = ({ user, token }) => {
   const [zipcode, setzipcode] = useState("");
   const [city, setCity] = useState("");
   const [coords, setCoords] = useState({ lng: 2.35, lat: 48.853 });
+  const [coordsSet, setCoordsSet] = useState(false);
   const [generalInfo, setGeneralInfo] = useState(false);
   const [venueDetails, setVenueDetails] = useState(false);
   const [website, setWebsite] = useState("");
@@ -52,6 +54,7 @@ const AddListing = ({ user, token }) => {
           lng: data.data.features[0].geometry.coordinates[0],
           lat: data.data.features[0].geometry.coordinates[1],
         });
+        setCoordsSet(true);
         setLoading(false);
       } catch (error) {
         console.log(error);
@@ -97,6 +100,12 @@ const AddListing = ({ user, token }) => {
     }
   };
 
+  const handleDeletePic = (index) => {
+    const newPicsArray = [...pictures];
+    newPicsArray.splice(index, 1);
+    setPictures(newPicsArray);
+  };
+
   const handleSubmit = async () => {
     try {
       setLoading(true);
@@ -124,8 +133,7 @@ const AddListing = ({ user, token }) => {
         formData.append("pictures", pictures[picture]);
       });
       const response = await axios.post(
-        // "https://site--happycow-backend--67k4ycyfnl9b.code.run/add",
-        "http://localhost:4000/add",
+        "https://site--happycow-backend--67k4ycyfnl9b.code.run/add",
         formData,
         {
           headers: {
@@ -139,11 +147,12 @@ const AddListing = ({ user, token }) => {
       //     handleUser(response.data);
       //   }
       setLoading(false);
+      setVenueDetails(true);
     } catch (error) {
       console.log(error);
       if (error.response?.data.message === "Missing parameters.") {
         setErrorMessage(
-          "Please make sure to give a title, rate the shop and write a review."
+          "Please make sure to fill out all the required information."
         );
         setLoading(false);
       }
@@ -152,11 +161,53 @@ const AddListing = ({ user, token }) => {
 
   const handleContinue = () => {
     if (!generalInfo) {
-      setGeneralInfo(true);
+      if (
+        !businessName ||
+        !phoneNumber ||
+        !streetAddress ||
+        !zipcode ||
+        !city ||
+        !coordsSet
+      ) {
+        return;
+      } else {
+        setGeneralInfo(true);
+      }
     } else if (generalInfo && !venueDetails) {
-      setVenueDetails(true);
+      if (
+        !placeDescription ||
+        !veganDishesDescription ||
+        !openingDays ||
+        !price ||
+        !rating ||
+        pictures.length < 1 ||
+        loading
+      ) {
+        return;
+      } else {
+        handleSubmit();
+      }
     } else if (generalInfo && venueDetails) {
-      handleSubmit();
+      setCoords({ lng: 2.35, lat: 48.853 });
+      setBusinessName("");
+      setCity("");
+      setFacebook("");
+      setWebsite("");
+      setPhoneNumber("");
+      setStreetAddress("");
+      setzipcode("");
+      setPrice("Moderate");
+      setPlaceDescription("");
+      setVeganDishesDescription("");
+      setOpeningDays("");
+      setPictures([]);
+      setRating("");
+      setGeneralInfo(false);
+      setVenueDetails(false);
+      setAnimalOrigin("");
+      setShopType("");
+      setCoordsSet(false);
+      navigate("/");
     }
   };
 
@@ -364,9 +415,24 @@ const AddListing = ({ user, token }) => {
           <AddListingBottomButtons
             handleClear={handleClear}
             handleContinue={handleContinue}
+            businessName={businessName}
+            phoneNumber={phoneNumber}
+            streetAddress={streetAddress}
+            zipcode={zipcode}
+            city={city}
+            coordsSet={coordsSet}
+            placeDescription={placeDescription}
+            veganDishesDescription={veganDishesDescription}
+            openingDays={openingDays}
+            price={price}
+            rating={rating}
+            pictures={pictures}
+            generalInfo={generalInfo}
           />
         </div>
-      ) : animalOrigin === false && generalInfo === true ? (
+      ) : animalOrigin === false &&
+        generalInfo === true &&
+        venueDetails === false ? (
         <div className="add-listing-info">
           <AddListingNav
             handleGoBack={handleGoBack}
@@ -383,7 +449,7 @@ const AddListing = ({ user, token }) => {
               type="text"
               rows="5"
               className="text-area"
-              placeholder="e.g. Italian resturant"
+              placeholder="e.g. Italian restaurant"
               value={placeDescription}
               onChange={(event) => {
                 setPlaceDescription(event.target.value);
@@ -455,7 +521,11 @@ const AddListing = ({ user, token }) => {
             </p>
           </div>
           <div className="add-listing-rating-div">
-            <p>{ratings(rating ? rating : 0)}</p>
+            <p>
+              Venue rating
+              <span style={{ color: "red" }}> *</span>
+            </p>
+            <div>{ratings(rating ? rating : 0)}</div>
             <select
               name="rating"
               id="rating"
@@ -516,20 +586,61 @@ const AddListing = ({ user, token }) => {
               {pictures &&
                 pictures.map((picture, index) => {
                   return (
-                    <img
-                      src={URL.createObjectURL(picture)}
+                    <div
                       key={index}
-                      alt={`Shop ${index}`}
-                      className="pictures-to-upload"
-                    />
+                      style={{ position: "relative", marginRight: "15px" }}
+                    >
+                      <img
+                        src={URL.createObjectURL(picture)}
+                        alt={`Shop ${index}`}
+                        className="pictures-to-upload"
+                      />
+                      <div
+                        style={{
+                          position: "absolute",
+                          top: "5px",
+                          right: "5px",
+                          backgroundColor: "white",
+                          cursor: "pointer",
+                          display: "flex",
+                          justifyContent: "center",
+                          alignItems: "center",
+                          height: "30px",
+                          width: "30px",
+                          borderRadius: "50%",
+                        }}
+                        onClick={() => {
+                          handleDeletePic(index);
+                        }}
+                      >
+                        <FaTrash
+                          style={{
+                            color: "#7c4ec4",
+                          }}
+                        />
+                      </div>
+                    </div>
                   );
                 })}
             </div>
           </div>
-
           <AddListingBottomButtons
             handleClear={handleClear}
             handleContinue={handleContinue}
+            businessName={businessName}
+            phoneNumber={phoneNumber}
+            streetAddress={streetAddress}
+            zipcode={zipcode}
+            city={city}
+            coordsSet={coordsSet}
+            placeDescription={placeDescription}
+            veganDishesDescription={veganDishesDescription}
+            openingDays={openingDays}
+            price={price}
+            rating={rating}
+            pictures={pictures}
+            generalInfo={generalInfo}
+            loading={loading}
           />
           {loading && (
             <MutatingDots
@@ -542,13 +653,27 @@ const AddListing = ({ user, token }) => {
               wrapperStyle={{}}
               wrapperClass=""
               visible={true}
+              className="addlisting-loader"
             />
           )}
         </div>
-      ) : venueDetails ? (
-        <div></div>
       ) : (
-        <div></div>
+        venueDetails && (
+          <div className="add-listing-info-after-submit">
+            {errorMessage ? (
+              <h1 className="after-addlisting-submit-message">
+                {errorMessage}
+              </h1>
+            ) : (
+              <h1 className="after-addlisting-submit-message">
+                The venue has successfully been added. Thank you for your help.
+              </h1>
+            )}
+            <div className="validate" onClick={handleContinue}>
+              Continue
+            </div>
+          </div>
+        )
       )}
     </div>
   );

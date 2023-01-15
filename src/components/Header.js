@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import headerLogo from "../assets/happycow_logo.svg";
 
-const Header = ({ token, handleToken, user, handleUser }) => {
+const Header = ({ token, handleToken, user, handleUser, setParams }) => {
   const [visible, setVisible] = useState(false);
   const dropdownRef = useRef();
   const triggerRef = useRef();
@@ -39,13 +39,25 @@ const Header = ({ token, handleToken, user, handleUser }) => {
   return (
     <header className="header">
       <div className="header-logo">
-        <Link to="/" className="home-btn">
+        <div
+          onClick={() => {
+            setParams({
+              category: [],
+              sort: null,
+              name: "",
+              limit: 81,
+              skip: 0,
+            });
+            navigate("/");
+          }}
+          className="home-btn"
+        >
           <img
             src={headerLogo}
             alt="Logo of HappyCow"
             className="top-left-logo"
           />
-        </Link>
+        </div>
       </div>
       {token ? (
         <div className="logout">
