@@ -179,7 +179,7 @@ const AddListing = ({ user, token }) => {
         !veganDishesDescription ||
         !openingDays ||
         !price ||
-        !rating ||
+        rating === "" ||
         pictures.length < 1 ||
         loading
       ) {
@@ -643,18 +643,19 @@ const AddListing = ({ user, token }) => {
             loading={loading}
           />
           {loading && (
-            <MutatingDots
-              height="100"
-              width="100"
-              color="#7c4ec4"
-              secondaryColor="#7c4ec4"
-              radius="12.5"
-              ariaLabel="mutating-dots-loading"
-              wrapperStyle={{}}
-              wrapperClass=""
-              visible={true}
-              className="addlisting-loader"
-            />
+            <div className="addlisting-loader">
+              <MutatingDots
+                height="100"
+                width="100"
+                color="#7c4ec4"
+                secondaryColor="#7c4ec4"
+                radius="12.5"
+                ariaLabel="mutating-dots-loading"
+                wrapperStyle={{}}
+                wrapperClass=""
+                visible={true}
+              />
+            </div>
           )}
         </div>
       ) : (

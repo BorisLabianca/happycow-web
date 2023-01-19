@@ -55,7 +55,7 @@ const AddListingBottomButtons = ({
         !veganDishesDescription ||
         !openingDays ||
         !price ||
-        !rating ||
+        rating === "" ||
         pictures.length < 1 ||
         loading
       ) {

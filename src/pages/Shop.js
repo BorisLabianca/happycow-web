@@ -201,12 +201,14 @@ const Shop = ({
                     onClick={handleAddToFavorite}
                   />
                 ) : (
-                  <FontAwesomeIcon
-                    icon="bookmark"
-                    color="#7B4EC3"
-                    className="favorite-icon"
-                    onClick={handleDeleteFavorite}
-                  />
+                  user?.favorites?.indexOf(shop._id) !== -1 && (
+                    <FontAwesomeIcon
+                      icon="bookmark"
+                      color="#7B4EC3"
+                      className="favorite-icon"
+                      onClick={handleDeleteFavorite}
+                    />
+                  )
                 )}
               </div>
             </div>

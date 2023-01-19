@@ -1199,6 +1199,7 @@ body a {
   box-sizing: border-box;
   border: 1px solid #ababab;
   border-radius: 10px;
+  position: relative;
 }
 .add-listing-info-nav {
   display: flex;
@@ -1427,7 +1428,7 @@ body a {
   border: 1px solid #444444;
 }
 .addlisting-loader {
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
 }
