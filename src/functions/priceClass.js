@@ -25,6 +25,48 @@ const priceClass = (price) => {
           className="dollar-sign"
         />
       );
+    } else if (price === "Moderate") {
+      priceArray.push(
+        <FontAwesomeIcon
+          icon="dollar-sign"
+          color="purple"
+          key="01"
+          className="dollar-sign"
+        />,
+        <FontAwesomeIcon
+          icon="dollar-sign"
+          color="purple"
+          key="02"
+          className="dollar-sign"
+        />,
+        <FontAwesomeIcon
+          icon="dollar-sign"
+          color="lightgrey"
+          key="03"
+          className="dollar-sign"
+        />
+      );
+    } else if (price === "Expensive") {
+      priceArray.push(
+        <FontAwesomeIcon
+          icon="dollar-sign"
+          color="purple"
+          key="01"
+          className="dollar-sign"
+        />,
+        <FontAwesomeIcon
+          icon="dollar-sign"
+          color="purple"
+          key="02"
+          className="dollar-sign"
+        />,
+        <FontAwesomeIcon
+          icon="dollar-sign"
+          color="purple"
+          key="03"
+          className="dollar-sign"
+        />
+      );
     }
   }
 
