@@ -3,7 +3,12 @@ import { FaGithub, FaLinkedin } from "react-icons/fa";
 
 const Footer = ({ tech, techSite, place, placeSite, author, linkedin }) => {
   const { pathname } = useLocation();
-  if (pathname === "/alloffersmap" || pathname === "/user/favorites") {
+  if (
+    pathname === "/alloffersmap" ||
+    pathname === "/user/favorites" ||
+    pathname === "/user/login" ||
+    pathname === "/user/signup"
+  ) {
     return null;
   }
   return (

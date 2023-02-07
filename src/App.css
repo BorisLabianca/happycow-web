@@ -1706,6 +1706,7 @@ body a {
   color: #5c48d3;
   margin: 100px 0 50px 0;
   box-sizing: border-box;
+  background-color: transparent;
 }
 footer a {
   text-decoration: none;
