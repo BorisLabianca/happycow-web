@@ -1973,6 +1973,26 @@ footer a {
   cursor: not-allowed;
 }
 
+/* Style de la modal AddReviewModal */
+.photos-container-add-pictures {
+  width: 250px;
+  height: 120px;
+  border: 1px dashed #444444;
+  border-radius: 5px;
+  display: flex;
+  overflow: scroll;
+  align-items: center;
+  padding: 15px;
+  gap: 20px;
+}
+.photos-to-upload-add-pictures {
+  height: 100px;
+  border: 1px solid #444444;
+}
+.photos-container-add-pictures input {
+  display: none;
+}
+
 /* Style du loader */
 .loader-div {
   display: flex;

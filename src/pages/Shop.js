@@ -21,6 +21,7 @@ const Shop = ({
   token,
   handleUser,
   setAddReviewModalVisible,
+  setAddPicturesModalVisible,
   setPlaceId,
 }) => {
   const { id } = useParams();
@@ -249,10 +250,25 @@ const Shop = ({
                 </Link>
               )}
 
-              <div className="add-photo">
-                <FontAwesomeIcon icon="camera" />
-                <p>Add Photos</p>
-              </div>
+              {token ? (
+                <div
+                  className="add-photo"
+                  onClick={() => {
+                    setPlaceId(id);
+                    setAddPicturesModalVisible([true, user._id]);
+                  }}
+                >
+                  <FontAwesomeIcon icon="camera" />
+                  <p>Add Photos</p>
+                </div>
+              ) : (
+                <Link to="/user/login">
+                  <div className="add-photo">
+                    <FontAwesomeIcon icon="camera" />
+                    <p>Add Photos</p>
+                  </div>
+                </Link>
+              )}
             </div>
           </div>
           <div className="separation-div" style={{ marginTop: "35px" }}></div>

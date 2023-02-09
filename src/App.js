@@ -20,6 +20,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import UserUpdateModal from "./modals/UserUpdateModal";
 import AddReviewModal from "./modals/AddReviewModal";
+import AddPicturesModal from "./modals/AddPicturesModal";
 import ScroolToTop from "./components/ScrollToTop";
 
 // Import de Fontawesome
@@ -111,6 +112,10 @@ function App() {
   const [restaurants, setRestaurants] = useState([]);
   const [profileModalVisible, setProfileModalVisible] = useState(false);
   const [addReviewModalVisible, setAddReviewModalVisible] = useState([
+    false,
+    "",
+  ]);
+  const [addPicturesModalVisible, setAddPicturesModalVisible] = useState([
     false,
     "",
   ]);
@@ -222,6 +227,7 @@ function App() {
                 token={token}
                 handleUser={handleUser}
                 setAddReviewModalVisible={setAddReviewModalVisible}
+                setAddPicturesModalVisible={setAddPicturesModalVisible}
                 setPlaceId={setPlaceId}
               />
             }
@@ -285,9 +291,14 @@ function App() {
         {addReviewModalVisible[0] && (
           <AddReviewModal
             token={token}
-            user={user}
-            addReviewModalVisible={addReviewModalVisible}
             setAddReviewModalVisible={setAddReviewModalVisible}
+            placeId={placeId}
+          />
+        )}
+        {addPicturesModalVisible[0] && (
+          <AddPicturesModal
+            token={token}
+            setAddPicturesModalVisible={setAddPicturesModalVisible}
             placeId={placeId}
           />
         )}

@@ -9,13 +9,7 @@ import ratings from "../functions/ratings";
 // Import de Fontawesome
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const AddReviewModal = ({
-  token,
-  user,
-  addReviewModalVisible,
-  setAddReviewModalVisible,
-  placeId,
-}) => {
+const AddReviewModal = ({ token, setAddReviewModalVisible, placeId }) => {
   const [loading, setLoading] = useState(false);
   const [title, setTitle] = useState("");
   const [review, setReview] = useState("");
@@ -26,7 +20,11 @@ const AddReviewModal = ({
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleSubmit = async () => {
+    setErrorMessage("");
     try {
+      if (!title || !review || !rating) {
+        return;
+      }
       setLoading(true);
       const formData = new FormData();
       formData.append("title", title);
@@ -197,7 +195,11 @@ const AddReviewModal = ({
             <div className="error-message">{errorMessage}</div>
             <button
               type="button"
-              className={loading ? "submit-button-disabled" : "submit-button"}
+              className={
+                loading || !title || !review || !rating
+                  ? "submit-button-disabled"
+                  : "submit-button"
+              }
               disabled={loading ? true : false}
               onClick={handleSubmit}
             >
