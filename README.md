@@ -1,6 +1,6 @@
 # happycow-front
 
-<img width="1727" alt="Capture d’écran" src="https://user-images.githubusercontent.com/114598539/210790983-4843b733-a722-45d7-b12a-4a9192f7eb9e.png">
+<img width="1727" alt="Capture d’écran" src="https://user-images.githubusercontent.com/114598539/219403145-f9901f80-7d08-4d6a-8112-8bf670b7ca7d.gif">
 
 ## Techs used
 
@@ -12,7 +12,18 @@
 <a href="https://reactjs.org/" target="_blank" rel="noreferrer"><img src="https://user-images.githubusercontent.com/25181517/183897015-94a058a6-b86e-4e42-a37f-bf92061753e5.png" width="50" height="50" alt="React" /></a>
 </p>
 
-# Getting Started with Create React App
+## Features
+
+- Authentication
+- User can add businesses to list
+- Review system
+- Rating system
+- Users can add photos to a business
+- Add to favorites
+- Custom-made carousel
+- Call to 3rd-party governmental API to get coordinates from street address
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
